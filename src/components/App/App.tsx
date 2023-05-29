@@ -1,5 +1,14 @@
+import Header from "../Header/Header";
+import ContainerStyled from "../shared/ContainerStyled";
+
 const App = (): React.ReactElement => {
-  return <h1>{"Grandma's Cookbook"}</h1>;
+  return (
+    <>
+      <ContainerStyled>
+        <Header />
+      </ContainerStyled>
+    </>
+  );
 };
 
 export default App;
