@@ -7,11 +7,13 @@ import "@fontsource/lexend";
 import "@fontsource/crimson-pro";
 import { store } from "./store";
 import { ThemeProvider } from "styled-components";
-import theme from "./styles/theme/theme";
+import theme from "./styles/theme/theme.js";
+import GlobalStyle from "./styles/GlobalStyle.js";
 
 ReactDOM.createRoot(document.getElementById("root") as HTMLElement).render(
   <React.StrictMode>
     <ThemeProvider theme={theme}>
+      <GlobalStyle />
       <Provider store={store}>
         <App />
       </Provider>
