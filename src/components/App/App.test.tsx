@@ -1,17 +1,24 @@
 import { render, screen } from "@testing-library/react";
-import { Provider } from "react-redux";
-import { store } from "../../store";
-import { RouterProvider } from "react-router-dom";
-import appRouter from "../../routers/appRouter";
+import App from "./App";
+import { ThemeProvider } from "styled-components";
+import theme from "../../styles/theme/theme";
+import {
+  RouteObject,
+  RouterProvider,
+  createMemoryRouter,
+} from "react-router-dom";
 
 describe("Given an App component", () => {
   describe("When rendered", () => {
     test("Then it should show an image with an alternative text 'Grandma's Cookbook's logo'", () => {
       const expectedAlternativeText = "Grandma's Cookbook's logo";
+      const route: RouteObject[] = [{ path: "/", element: <App /> }];
+      const router = createMemoryRouter(route);
+
       render(
-        <Provider store={store}>
-          <RouterProvider router={appRouter} />
-        </Provider>
+        <ThemeProvider theme={theme}>
+          <RouterProvider router={router} />
+        </ThemeProvider>
       );
       const image = screen.getByRole("img", { name: expectedAlternativeText });
 
