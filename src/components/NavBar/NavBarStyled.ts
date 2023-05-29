@@ -16,7 +16,7 @@ const NavBarStyled = styled.nav`
       justify-content: center;
       color: ${(props) => props.theme.colors.primary};
 
-      .active {
+      &.active {
         color: ${(props) => props.theme.colors.dark};
         text-decoration: underline;
       }

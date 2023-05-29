@@ -6,7 +6,7 @@ const NavBar = (): React.ReactElement => {
     <NavBarStyled className="navbar">
       <ul className="navbar__list">
         <li>
-          <NavLink className="navbar__link" to="/recipes" aria-label="recipes">
+          <NavLink className="navbar__link" to="/home" aria-label="home">
             Home
           </NavLink>
         </li>
