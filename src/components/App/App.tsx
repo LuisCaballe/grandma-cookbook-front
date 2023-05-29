@@ -1,4 +1,5 @@
 import Header from "../Header/Header";
+import NavBar from "../NavBar/NavBar";
 import ContainerStyled from "../shared/ContainerStyled";
 
 const App = (): React.ReactElement => {
@@ -6,6 +7,7 @@ const App = (): React.ReactElement => {
     <>
       <ContainerStyled>
         <Header />
+        <NavBar />
       </ContainerStyled>
     </>
   );
