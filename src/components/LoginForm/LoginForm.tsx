@@ -2,7 +2,11 @@ import { useState } from "react";
 import LoginFormStyled from "./LoginFormStyled";
 import { UserDataCredentials } from "../../types";
 
-const LoginForm = (): React.ReactElement => {
+interface LoginFormProps {
+  actionOnSubmit: (user: UserDataCredentials) => void;
+}
+
+const LoginForm = ({ actionOnSubmit }: LoginFormProps): React.ReactElement => {
   const initialUserCredentials: UserDataCredentials = {
     username: "",
     password: "",
@@ -22,8 +26,14 @@ const LoginForm = (): React.ReactElement => {
   const isEnable =
     userCredentials.username !== "" && userCredentials.password !== "";
 
+  const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
+    event.preventDefault();
+    actionOnSubmit(userCredentials);
+    setUserCredentials(initialUserCredentials);
+  };
+
   return (
-    <LoginFormStyled className="login-form">
+    <LoginFormStyled className="login-form" onSubmit={handleSubmit}>
       <h1 className="login-form__title">Login</h1>
       <div className="login-form__control">
         <label htmlFor="username">Username :</label>
@@ -32,6 +42,7 @@ const LoginForm = (): React.ReactElement => {
           type="text"
           className="login-form__input"
           onChange={onChangeData}
+          value={userCredentials.username}
         />
       </div>
       <div className="login-form__control">
@@ -41,6 +52,7 @@ const LoginForm = (): React.ReactElement => {
           type="password"
           className="login-form__input"
           onChange={onChangeData}
+          value={userCredentials.password}
         />
       </div>
       <button disabled={!isEnable} className="login-form__button">
