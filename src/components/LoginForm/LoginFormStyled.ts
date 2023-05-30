@@ -30,6 +30,12 @@ const LoginFormStyled = styled.form`
       color: ${(props) => props.theme.colors.light};
       border-radius: 10px;
       height: 3rem;
+
+      :disabled {
+        color: ${(props) => props.theme.colors.primary};
+        background-color: transparent;
+        border: 2px solid;
+      }
     }
   }
 `;
