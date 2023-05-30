@@ -1,4 +1,6 @@
 import { DefaultTheme } from "styled-components";
+import "@fontsource/lexend";
+import "@fontsource/crimson-pro";
 
 const theme: DefaultTheme = {
   colors: {
