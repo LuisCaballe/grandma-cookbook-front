@@ -19,6 +19,9 @@ const LoginForm = (): React.ReactElement => {
     });
   };
 
+  const isEnable =
+    userCredentials.username !== "" && userCredentials.password !== "";
+
   return (
     <LoginFormStyled className="login-form">
       <h1 className="login-form__title">Login</h1>
@@ -40,7 +43,9 @@ const LoginForm = (): React.ReactElement => {
           onChange={onChangeData}
         />
       </div>
-      <button className="login-form__button">Login</button>
+      <button disabled={!isEnable} className="login-form__button">
+        Login
+      </button>
     </LoginFormStyled>
   );
 };
