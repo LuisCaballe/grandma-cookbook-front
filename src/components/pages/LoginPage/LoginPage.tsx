@@ -1,3 +1,4 @@
+import LoginForm from "../../LoginForm/LoginForm";
 import LoginPageStyled from "./LoginPageStyled";
 
 const LoginPage = (): React.ReactElement => {
@@ -13,6 +14,7 @@ const LoginPage = (): React.ReactElement => {
         width="260"
         height="135"
       />
+      <LoginForm />
     </LoginPageStyled>
   );
 };
