@@ -27,6 +27,10 @@ h6 {
   font-family: ${(props) => props.theme.fonts.secondary};
 }
 
+h1 {
+  font-size: 1.5rem;
+}
+
 p {
   margin: 0;
   font-family: ${(props) => props.theme.fonts.primary};
@@ -43,6 +47,7 @@ button {
   border: none;
   background-color: transparent;
   cursor: pointer;
+  padding: 0;
 }
 
 input {

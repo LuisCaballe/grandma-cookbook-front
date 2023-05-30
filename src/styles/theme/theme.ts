@@ -4,7 +4,7 @@ import "@fontsource/crimson-pro";
 
 const theme: DefaultTheme = {
   colors: {
-    light: "#fffff",
+    light: "#fff",
     dark: "#020100",
     primary: "#9d3618",
     secondary: "#14bbbb",

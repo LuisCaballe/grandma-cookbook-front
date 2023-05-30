@@ -4,8 +4,8 @@ import { renderWithProviders } from "../../testUtils/testUtils";
 
 describe("Given a NavBar component", () => {
   describe("When it is rendered", () => {
-    test("Then it should show a link to 'home'", () => {
-      const expectedLinkText = "home";
+    test("Then it should show a link to 'Home'", () => {
+      const expectedLinkText = "Home";
 
       renderWithProviders(<NavBar />);
 
