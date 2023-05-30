@@ -16,9 +16,7 @@ const NavBar = (): React.ReactElement => {
           </NavLink>
         </li>
         <li>
-          <NavLink className="navbar__link" to="/logout">
-            Logout
-          </NavLink>
+          <button className="navbar__link">Logout</button>
         </li>
       </ul>
     </NavBarStyled>
