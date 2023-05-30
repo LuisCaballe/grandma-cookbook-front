@@ -14,7 +14,11 @@ const LoginPage = (): React.ReactElement => {
         width="260"
         height="135"
       />
-      <LoginForm />
+      <LoginForm
+        actionOnSubmit={() => {
+          true;
+        }}
+      />
     </LoginPageStyled>
   );
 };

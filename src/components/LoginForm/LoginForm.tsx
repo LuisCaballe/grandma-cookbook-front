@@ -55,7 +55,7 @@ const LoginForm = ({ actionOnSubmit }: LoginFormProps): React.ReactElement => {
           value={userCredentials.password}
         />
       </div>
-      <button disabled={!isEnable} className="login-form__button">
+      <button type="submit" disabled={!isEnable} className="login-form__button">
         Login
       </button>
     </LoginFormStyled>
