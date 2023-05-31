@@ -38,4 +38,20 @@ describe("Given a useLocalStorage custom hook", () => {
       expect(savedToken).toStrictEqual(tokenMock);
     });
   });
+
+  describe("When is called its function removeToken with a 'token' key", () => {
+    test("Then it should remove the token saved in local storage", () => {
+      const {
+        result: {
+          current: { setToken, removeToken },
+        },
+      } = renderHook(() => useLocalStorage());
+
+      setToken(key, tokenMock);
+
+      removeToken(key);
+
+      expect(localStorage.length).toBe(0);
+    });
+  });
 });
