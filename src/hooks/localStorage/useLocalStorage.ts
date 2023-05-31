@@ -3,7 +3,11 @@ const useLocalStorage = () => {
     localStorage.setItem(key, token);
   };
 
-  return { setToken };
+  const getToken = (key: string) => {
+    return localStorage.getItem(key);
+  };
+
+  return { setToken, getToken };
 };
 
 export default useLocalStorage;
