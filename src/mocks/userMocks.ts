@@ -1,4 +1,5 @@
 import { UserTokenData, UserTokenStructure } from "../store/types";
+import { UserDataCredentials } from "../types";
 
 export const mockCurrentState: UserTokenData = {
   id: "",
@@ -19,3 +20,10 @@ export const mockExpectedNewState: UserTokenData = {
   token: "mock-token",
   isLogged: true,
 };
+
+export const mockUserCredentials: UserDataCredentials = {
+  username: "luis",
+  password: "luis",
+};
+
+export const tokenMock = "mock-token";
