@@ -1,6 +1,9 @@
+import { useLocation } from "react-router-dom";
 import NavBar from "../NavBar/NavBar";
 
 const Header = (): React.ReactElement => {
+  const { pathname } = useLocation();
+
   return (
     <>
       <header>
@@ -11,7 +14,7 @@ const Header = (): React.ReactElement => {
           height="63"
         />
       </header>
-      <NavBar />
+      {pathname !== "/login" && <NavBar />}
     </>
   );
 };
