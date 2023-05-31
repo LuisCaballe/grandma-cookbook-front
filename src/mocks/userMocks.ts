@@ -19,3 +19,5 @@ export const mockExpectedNewState: UserTokenData = {
   token: "mock-token",
   isLogged: true,
 };
+
+export const tokenMock = "mock-token";
