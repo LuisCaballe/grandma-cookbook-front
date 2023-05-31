@@ -6,12 +6,14 @@ import { loginUserActionCreator } from "../../../store/user/userSlice";
 import { UserDataCredentials } from "../../../types";
 import LoginForm from "../../LoginForm/LoginForm";
 import LoginPageStyled from "./LoginPageStyled";
+import useLocalStorage from "../../../hooks/localStorage/useLocalStorage";
 
 const LoginPage = (): React.ReactElement => {
   const { getToken } = useUser();
   const { getTokenData } = useToken();
   const dispatch = useAppDispatch();
   const navigate = useNavigate();
+  const { setToken } = useLocalStorage();
 
   const loginOnSubmit = async (userCredentials: UserDataCredentials) => {
     const token = await getToken(userCredentials);
@@ -20,6 +22,8 @@ const LoginPage = (): React.ReactElement => {
       const userData = getTokenData(token);
 
       dispatch(loginUserActionCreator(userData));
+
+      setToken("token", token);
 
       navigate("/home", { replace: true });
     }
