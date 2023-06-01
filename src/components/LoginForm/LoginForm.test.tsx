@@ -92,6 +92,7 @@ describe("Given a LoginForm component", () => {
       expect(passwordTextField).toHaveValue(passwordInputText);
     });
   });
+
   describe("When the user types 'Luis' in the username text field and '1234' in the password text field and submits the form", () => {
     test("Then it should call de function actionOnSubmit with the user credentials", async () => {
       const mockUser: UserDataCredentials = {
@@ -106,9 +107,7 @@ describe("Given a LoginForm component", () => {
       const button = screen.getByRole("button");
 
       await userEvent.type(usernameTextField, mockUser.username);
-
       await userEvent.type(passwordTextField, mockUser.password);
-
       await userEvent.click(button);
 
       expect(mockOnSubmit).toHaveBeenCalledWith(mockUser);
