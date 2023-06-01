@@ -40,8 +40,6 @@ describe("Given a LoginPage page", () => {
         },
       ];
       const router = createMemoryRouter(routes);
-      const usernameLabelText = "Username :";
-      const passwordLabelText = "Password :";
 
       render(
         <ThemeProvider theme={theme}>
@@ -51,6 +49,8 @@ describe("Given a LoginPage page", () => {
         </ThemeProvider>
       );
 
+      const usernameLabelText = "Username :";
+      const passwordLabelText = "Password :";
       const usernameTextField = screen.getByLabelText(usernameLabelText);
       const passwordTextField = screen.getByLabelText(passwordLabelText);
       const button = screen.getByRole("button", { name: "Login" });

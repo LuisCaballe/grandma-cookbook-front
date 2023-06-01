@@ -3,7 +3,10 @@ import userEvent from "@testing-library/user-event";
 import { vi } from "vitest";
 import LoginForm from "./LoginForm";
 import { renderWithProviders } from "../../testUtils/testUtils";
-import { getCredentialsMock } from "../../factories/user/userFactory";
+import {
+  getCredentialsMock,
+  getUserMock,
+} from "../../factories/user/userFactory";
 
 describe("Given a LoginForm component", () => {
   const mockOnSubmit = vi.fn();
@@ -65,9 +68,9 @@ describe("Given a LoginForm component", () => {
     });
   });
 
-  describe("When the user types 'Luis' in the username text field", () => {
-    test("Then it should show 'Luis' in the username text field", async () => {
-      const usernameInputText = "Luis";
+  describe("When the user types a username in the username text field", () => {
+    test("Then it should show a username in the username text field", async () => {
+      const usernameInputText = getUserMock().name;
 
       renderWithProviders(<LoginForm actionOnSubmit={mockOnSubmit} />);
 
@@ -79,9 +82,9 @@ describe("Given a LoginForm component", () => {
     });
   });
 
-  describe("When the user types '1234' in the password text field", () => {
-    test("Then it should show '1234' in the password text field", async () => {
-      const passwordInputText = "1234";
+  describe("When the user types a password in the password field", () => {
+    test("Then it should show the password in the password field", async () => {
+      const passwordInputText = getCredentialsMock().password;
 
       renderWithProviders(<LoginForm actionOnSubmit={mockOnSubmit} />);
 
@@ -93,7 +96,7 @@ describe("Given a LoginForm component", () => {
     });
   });
 
-  describe("When the user types 'Luis' in the username text field and '1234' in the password text field and submits the form", () => {
+  describe("When the user types a username in the username text field and a password in the password field and submits the form", () => {
     test("Then it should call de function actionOnSubmit with the user credentials", async () => {
       const mockCredentials = getCredentialsMock();
 
