@@ -1,7 +1,20 @@
-import { NavLink } from "react-router-dom";
+import { NavLink, useNavigate } from "react-router-dom";
 import NavBarStyled from "./NavBarStyled";
+import { useAppDispatch } from "../../store";
+import { logoutUserActionCreator } from "../../store/user/userSlice";
+import useLocalStorage from "../../hooks/localStorage/useLocalStorage";
 
 const NavBar = (): React.ReactElement => {
+  const dispatch = useAppDispatch();
+  const { removeToken } = useLocalStorage();
+  const navigate = useNavigate();
+
+  const logoutOnClick = () => {
+    dispatch(logoutUserActionCreator());
+    removeToken("token");
+    navigate("/login");
+  };
+
   return (
     <NavBarStyled className="navbar">
       <ul className="navbar__list">
@@ -16,7 +29,9 @@ const NavBar = (): React.ReactElement => {
           </NavLink>
         </li>
         <li>
-          <button className="navbar__link">Logout</button>
+          <button className="navbar__link" onClick={logoutOnClick}>
+            Logout
+          </button>
         </li>
       </ul>
     </NavBarStyled>

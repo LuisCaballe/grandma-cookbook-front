@@ -1,6 +1,6 @@
 import styled from "styled-components";
 
-const LoginPageStyled = styled.div`
+const LoginPageStyled = styled.section`
   display: flex;
   flex-direction: column;
   gap: 30px;
