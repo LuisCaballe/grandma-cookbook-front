@@ -1,7 +1,7 @@
-import { UserTokenData, UserTokenStructure } from "../store/types";
+import { UserDataStructure, UserTokenStructure } from "../store/types";
 import { UserDataCredentials } from "../types";
 
-export const mockCurrentState: UserTokenData = {
+export const mockCurrentState: UserDataStructure = {
   id: "",
   name: "",
   token: "",
@@ -14,7 +14,7 @@ export const mockUserToken: UserTokenStructure = {
   token: "mock-token",
 };
 
-export const mockExpectedNewState: UserTokenData = {
+export const mockExpectedNewState: UserDataStructure = {
   id: "1234",
   name: "Luis",
   token: "mock-token",

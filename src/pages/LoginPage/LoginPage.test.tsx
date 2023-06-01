@@ -1,5 +1,5 @@
 import { render, screen } from "@testing-library/react";
-import { renderWithProviders } from "../../../testUtils/testUtils";
+import { renderWithProviders } from "../../testUtils/testUtils";
 import userEvent from "@testing-library/user-event";
 import LoginPage from "./LoginPage";
 import {
@@ -9,9 +9,9 @@ import {
 } from "react-router-dom";
 import { ThemeProvider } from "styled-components";
 import { Provider } from "react-redux";
-import { store } from "../../../store";
-import theme from "../../../styles/theme/theme";
-import { UserDataCredentials } from "../../../types";
+import { store } from "../../store";
+import theme from "../../styles/theme/theme";
+import { UserDataCredentials } from "../../types";
 
 describe("Given a LoginPage page", () => {
   describe("When it is rendered", () => {
@@ -40,8 +40,6 @@ describe("Given a LoginPage page", () => {
         },
       ];
       const router = createMemoryRouter(routes);
-      const usernameLabelText = "Username :";
-      const passwordLabelText = "Password :";
 
       render(
         <ThemeProvider theme={theme}>
@@ -51,6 +49,8 @@ describe("Given a LoginPage page", () => {
         </ThemeProvider>
       );
 
+      const usernameLabelText = "Username :";
+      const passwordLabelText = "Password :";
       const usernameTextField = screen.getByLabelText(usernameLabelText);
       const passwordTextField = screen.getByLabelText(passwordLabelText);
       const button = screen.getByRole("button", { name: "Login" });
