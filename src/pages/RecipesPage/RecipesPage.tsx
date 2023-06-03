@@ -1,8 +1,10 @@
 import { useEffect } from "react";
-import { mockRecipesList } from "../../mocks/recipeMocks";
 import { useAppDispatch, useAppSelector } from "../../store";
 import { loadRecipesActionCreator } from "../../store/recipe/recipeSlice";
 import RecipesPageStyled from "./RecipesPageStyled";
+import { getRecipesListMock } from "../../factories/recipe/recipeFactory";
+
+const mockRecipesList = getRecipesListMock(4);
 
 const RecipesPage = (): React.ReactElement => {
   const dispatch = useAppDispatch();
