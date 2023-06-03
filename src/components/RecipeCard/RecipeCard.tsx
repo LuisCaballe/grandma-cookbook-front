@@ -12,6 +12,7 @@ const RecipeCard = ({ recipe }: RecipeCardProps): React.ReactElement => {
       <Button
         className="recipe-card__cercle-button"
         icon="images/delete-btn.svg"
+        altText="Delete button"
         width="48"
         height="48"
       />
