@@ -3,7 +3,7 @@ import { useAppDispatch, useAppSelector } from "../../store";
 import { loadRecipesActionCreator } from "../../store/recipe/recipeSlice";
 import RecipesPageStyled from "./RecipesPageStyled";
 import { getRecipesListMock } from "../../factories/recipe/recipeFactory";
-import RecipesList from "../../components/RecipesList/REcipesList";
+import RecipesList from "../../components/RecipesList/RecipesList";
 
 const mockRecipesList = getRecipesListMock(4);
 
