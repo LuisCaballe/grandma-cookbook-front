@@ -3,7 +3,9 @@ interface ButtonProps {
   icon?: string;
   actionOnClick?: () => void;
   className?: string;
-  ariaLabel?: string;
+  altText?: string;
+  width?: string;
+  height?: string;
 }
 
 const Button = ({
@@ -11,16 +13,16 @@ const Button = ({
   icon,
   actionOnClick,
   className,
-  ariaLabel,
+  altText,
+  width,
+  height,
 }: ButtonProps): React.ReactElement => {
   return (
-    <button
-      className={className}
-      onClick={actionOnClick}
-      aria-label={ariaLabel}
-    >
-      {text}
-      {icon}
+    <button className={className} onClick={actionOnClick}>
+      {text ||
+        (icon && (
+          <img src={icon} alt={altText} width={width} height={height} />
+        ))}
     </button>
   );
 };

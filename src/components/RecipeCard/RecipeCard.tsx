@@ -1,4 +1,5 @@
 import { RecipeStructure } from "../../store/recipe/types";
+import Button from "../Button/Button";
 import RecipeCardStyled from "./RecipeCardStyled";
 
 interface RecipeCardProps {
@@ -8,6 +9,12 @@ interface RecipeCardProps {
 const RecipeCard = ({ recipe }: RecipeCardProps): React.ReactElement => {
   return (
     <RecipeCardStyled className="recipe-card">
+      <Button
+        className="recipe-card__cercle-button"
+        icon="images/delete-btn.svg"
+        width="48"
+        height="48"
+      />
       <img
         className="recipe-card__image"
         src={recipe.imageUrl}
