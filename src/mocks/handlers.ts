@@ -1,11 +1,16 @@
 import { rest } from "msw";
 import { tokenMock } from "./userMocks";
+import { mockRecipesList } from "./recipeMocks";
 
 const apiUrl = import.meta.env.VITE_API_URL;
 
 export const handlers = [
   rest.post(`${apiUrl}/user/login`, (_req, res, ctx) => {
     return res(ctx.status(200), ctx.json({ token: tokenMock }));
+  }),
+
+  rest.get(`${apiUrl}/recipes`, (_req, res, ctx) => {
+    return res(ctx.status(200), ctx.json({ recipes: mockRecipesList }));
   }),
 ];
 
