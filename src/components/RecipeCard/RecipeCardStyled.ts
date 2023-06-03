@@ -3,6 +3,7 @@ import styled from "styled-components";
 const RecipeCardStyled = styled.article`
   background-color: ${(props) => props.theme.colors.lightBackground};
   width: 260px;
+  position: relative;
 
   .recipe-card {
     &__image {
@@ -24,6 +25,12 @@ const RecipeCardStyled = styled.article`
 
     &__text {
       color: ${(props) => props.theme.colors.primary};
+    }
+
+    &__cercle-button {
+      position: absolute;
+      right: 10px;
+      top: 10px;
     }
   }
 `;
