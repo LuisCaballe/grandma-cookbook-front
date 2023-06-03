@@ -3,7 +3,7 @@ import { RecipeStructure } from "../../store/recipe/types";
 import { faker } from "@faker-js/faker";
 
 const difficultyWords = ["Easy", "Moderate", "Advanced"];
-const randomNumber = faker.datatype.number({
+const randomNumber = faker.number.int({
   min: 0,
   max: difficultyWords.length - 1,
 });
