@@ -1,4 +1,5 @@
 import { useAppSelector } from "../../store";
+import RecipeCard from "../RecipeCard/RecipeCard";
 import RecipesListSyled from "./RecipesListStyled";
 
 const RecipesList = (): React.ReactElement => {
@@ -8,7 +9,7 @@ const RecipesList = (): React.ReactElement => {
     <RecipesListSyled>
       {recipes.map((recipe) => (
         <li key={recipe.id}>
-          <h2>{recipe.name}</h2>
+          <RecipeCard recipe={recipe} />
         </li>
       ))}
     </RecipesListSyled>
