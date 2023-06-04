@@ -9,6 +9,7 @@ const RecipesList = (): React.ReactElement => {
     <RecipesListSyled>
       {recipes.map((recipe) => (
         <li key={recipe.id}>
+          <link rel="preload" as="image" href={recipe.imageUrl}></link>
           <RecipeCard recipe={recipe} />
         </li>
       ))}
