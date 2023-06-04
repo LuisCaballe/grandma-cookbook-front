@@ -33,10 +33,6 @@ const LoginPage = (): React.ReactElement => {
 
   return (
     <LoginPageStyled>
-      <link
-        rel="preconnect"
-        href="https://luis-caballe-final-project-back-202304.onrender.com"
-      ></link>
       <p>
         Organize and relive the flavors of your childhood. Keep your culinary
         heritage alive for generations to come.
