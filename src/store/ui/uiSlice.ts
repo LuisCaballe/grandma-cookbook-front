@@ -13,6 +13,11 @@ const uiSlice = createSlice({
       ...currentState,
       isLoading: true,
     }),
+
+    hideLoading: (currentState: uiStructure): uiStructure => ({
+      ...currentState,
+      isLoading: false,
+    }),
   },
 });
 
