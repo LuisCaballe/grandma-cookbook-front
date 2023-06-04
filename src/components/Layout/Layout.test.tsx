@@ -14,4 +14,16 @@ describe("Given a Layout component", () => {
       expect(image).toBeInTheDocument();
     });
   });
+
+  describe("When it is loading recipes", () => {
+    test("Then it should show render the Loader component", () => {
+      const expectedLabelText = "loading spinner";
+
+      renderWithProviders(<Layout />, { ui: { isLoading: true } });
+
+      const loader = screen.getByLabelText(expectedLabelText);
+
+      expect(loader).toBeInTheDocument();
+    });
+  });
 });
