@@ -1,7 +1,7 @@
 import { screen } from "@testing-library/react";
 import NavBar from "./NavBar";
 import userEvent from "@testing-library/user-event";
-import { renderWithProviders } from "../../testUtils/testUtils";
+import { renderWithProviders, wrapWithRouter } from "../../testUtils/testUtils";
 import { getUserMock } from "../../factories/user/userFactory";
 
 describe("Given a NavBar component", () => {
@@ -9,7 +9,7 @@ describe("Given a NavBar component", () => {
     test("Then it should show a link to 'Home'", () => {
       const expectedLinkText = "Home";
 
-      renderWithProviders(<NavBar />);
+      renderWithProviders(wrapWithRouter(<NavBar />));
 
       const homeLink = screen.getByRole("link", { name: expectedLinkText });
 
@@ -20,7 +20,7 @@ describe("Given a NavBar component", () => {
       test("Then the logout button should disappear", async () => {
         const userMock = getUserMock({ isLogged: true });
 
-        renderWithProviders(<NavBar />, {
+        renderWithProviders(wrapWithRouter(<NavBar />), {
           user: userMock,
         });
 

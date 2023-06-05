@@ -1,5 +1,5 @@
-import { render, screen } from "@testing-library/react";
-import { renderWithProviders } from "../../testUtils/testUtils";
+import { screen } from "@testing-library/react";
+import { renderWithProviders, wrapWithRouter } from "../../testUtils/testUtils";
 import userEvent from "@testing-library/user-event";
 import LoginPage from "./LoginPage";
 import {
@@ -7,11 +7,8 @@ import {
   RouterProvider,
   createMemoryRouter,
 } from "react-router-dom";
-import { ThemeProvider } from "styled-components";
-import { Provider } from "react-redux";
-import { store } from "../../store";
-import theme from "../../styles/theme/theme";
 import { UserDataCredentials } from "../../types";
+import RecipesPage from "../RecipesPage/RecipesPage";
 
 describe("Given a LoginPage page", () => {
   describe("When it is rendered", () => {
@@ -20,7 +17,7 @@ describe("Given a LoginPage page", () => {
     );
     const expectedAlternativeText = "Illustration of cooking ingredients";
 
-    renderWithProviders(<LoginPage />);
+    renderWithProviders(wrapWithRouter(<LoginPage />));
 
     const image = screen.getByRole("img", { name: expectedAlternativeText });
 
@@ -38,16 +35,14 @@ describe("Given a LoginPage page", () => {
           path: "/",
           element: <LoginPage />,
         },
+        {
+          path: "/home",
+          element: <RecipesPage />,
+        },
       ];
       const router = createMemoryRouter(routes);
 
-      render(
-        <ThemeProvider theme={theme}>
-          <Provider store={store}>
-            <RouterProvider router={router} />
-          </Provider>
-        </ThemeProvider>
-      );
+      renderWithProviders(<RouterProvider router={router} />);
 
       const usernameLabelText = "Username :";
       const passwordLabelText = "Password :";
@@ -59,7 +54,9 @@ describe("Given a LoginPage page", () => {
       await userEvent.type(passwordTextField, mockUser.password);
       await userEvent.click(button);
 
-      expect(router.state.location.pathname).toBe("/home");
+      const deleteButtons = screen.getAllByAltText("Delete button");
+
+      expect(deleteButtons[0]).toBeInTheDocument();
     });
   });
 });
