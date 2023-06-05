@@ -1,4 +1,4 @@
-import { uiStructure } from "./types";
+import { UiStructure } from "./types";
 import {
   hideLoadingActionCreator,
   showLoadingActionCreator,
@@ -8,8 +8,16 @@ import {
 describe("Given a showLoading reducer", () => {
   describe("When it receives the current UI state and a showLoading action", () => {
     test("Then it should return the new UI state with isLoading property set at true", () => {
-      const currentUiState: uiStructure = { isLoading: false };
-      const expectedUiState: uiStructure = { isLoading: true };
+      const currentUiState: UiStructure = {
+        isLoading: false,
+        isError: false,
+        message: "",
+      };
+      const expectedUiState: UiStructure = {
+        isLoading: true,
+        isError: false,
+        message: "",
+      };
 
       const newUiState = uiReducer(currentUiState, showLoadingActionCreator());
 
@@ -21,8 +29,16 @@ describe("Given a showLoading reducer", () => {
 describe("Given a hideLoading reducer", () => {
   describe("When it receives the current UI state and a hideLoading action", () => {
     test("Then it should return the new UI state with isLoading property set at false", () => {
-      const currentUiState: uiStructure = { isLoading: true };
-      const expectedUiState: uiStructure = { isLoading: false };
+      const currentUiState: UiStructure = {
+        isLoading: true,
+        isError: false,
+        message: "",
+      };
+      const expectedUiState: UiStructure = {
+        isLoading: false,
+        isError: false,
+        message: "",
+      };
 
       const newUiState = uiReducer(currentUiState, hideLoadingActionCreator());
 
