@@ -3,6 +3,7 @@ import useUser from "./useUser";
 import { mockUserCredentials, tokenMock } from "../../mocks/userMocks";
 import { server } from "../../mocks/server";
 import { errorHandlers } from "../../mocks/handlers";
+import { wrapper } from "../../testUtils/testUtils";
 
 describe("Given a useUser custom hook", () => {
   describe("When it calls the function getToken with a valid username and a password", () => {
@@ -11,7 +12,7 @@ describe("Given a useUser custom hook", () => {
         result: {
           current: { getToken },
         },
-      } = renderHook(() => useUser());
+      } = renderHook(() => useUser(), { wrapper: wrapper });
 
       const token = await getToken(mockUserCredentials);
 
@@ -28,7 +29,7 @@ describe("Given a useUser custom hook", () => {
         result: {
           current: { getToken },
         },
-      } = renderHook(() => useUser());
+      } = renderHook(() => useUser(), { wrapper: wrapper });
 
       const getTokenFunction = getToken(mockUserCredentials);
 
