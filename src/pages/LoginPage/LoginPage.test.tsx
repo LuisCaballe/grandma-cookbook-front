@@ -25,7 +25,7 @@ describe("Given a LoginPage page", () => {
   });
 
   describe("When the user submit the form with a valid credentials", () => {
-    test("Then it should redirect the user to the home page", async () => {
+    test("Then it should show a delte button from one recipe", async () => {
       const mockUser: UserDataCredentials = {
         username: "admin",
         password: "admin",

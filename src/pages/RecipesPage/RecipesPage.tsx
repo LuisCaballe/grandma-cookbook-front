@@ -3,7 +3,7 @@ import { useAppDispatch, useAppSelector } from "../../store";
 import { loadRecipesActionCreator } from "../../store/recipe/recipeSlice";
 import RecipesPageStyled from "./RecipesPageStyled";
 import RecipesList from "../../components/RecipesList/RecipesList";
-import useRecipes from "../../hooks/recipe/useRecipes";
+import useRecipes from "../../hooks/recipes/useRecipes";
 
 const RecipesPage = (): React.ReactElement => {
   const dispatch = useAppDispatch();
