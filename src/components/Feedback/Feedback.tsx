@@ -1,16 +1,20 @@
 import Button from "../Button/Button";
+import FeedbackStyled from "./FeedbackStyled";
 
 const Feedback = (): React.ReactElement => {
   return (
-    <div className="feedback">
-      <div className="feedback__container" aria-label="feedback container">
+    <FeedbackStyled className="feedback">
+      <div
+        className="feedback__container feedback__container--error"
+        aria-label="feedback container"
+      >
         <img src="images/error.svg" alt="" />
-        <p>
+        <p className="feedback__text">
           {`Oops! There's been an error removing your recipe. Please try again`}
         </p>
-        <Button text="Close" />
+        <Button text="Close" className="feedback__button" />
       </div>
-    </div>
+    </FeedbackStyled>
   );
 };
 
