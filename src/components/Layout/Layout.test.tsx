@@ -19,7 +19,9 @@ describe("Given a Layout component", () => {
     test("Then it should show render the Loader component", () => {
       const expectedLabelText = "loading spinner";
 
-      renderWithProviders(<Layout />, { ui: { isLoading: true } });
+      renderWithProviders(<Layout />, {
+        ui: { isLoading: true, isError: false, message: "" },
+      });
 
       const loader = screen.getByLabelText(expectedLabelText);
 
