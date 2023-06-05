@@ -1,5 +1,5 @@
 import { screen } from "@testing-library/react";
-import { renderWithProviders } from "../../testUtils/testUtils";
+import { renderWithProviders, wrapWithRouter } from "../../testUtils/testUtils";
 import Layout from "./Layout";
 
 describe("Given a Layout component", () => {
@@ -7,9 +7,11 @@ describe("Given a Layout component", () => {
     test("Then it should show an image with an alternative text 'Grandma's Cookbook's logo'", () => {
       const expectedAlternativeText = "Grandma's Cookbook's logo";
 
-      renderWithProviders(<Layout />);
+      renderWithProviders(wrapWithRouter(<Layout />));
 
       const image = screen.getByRole("img", { name: expectedAlternativeText });
+
+      screen.debug();
 
       expect(image).toBeInTheDocument();
     });
@@ -19,13 +21,29 @@ describe("Given a Layout component", () => {
     test("Then it should show render the Loader component", () => {
       const expectedLabelText = "loading spinner";
 
-      renderWithProviders(<Layout />, {
+      renderWithProviders(wrapWithRouter(<Layout />), {
         ui: { isLoading: true, isError: false, message: "" },
       });
 
       const loader = screen.getByLabelText(expectedLabelText);
 
       expect(loader).toBeInTheDocument();
+    });
+  });
+
+  describe("When it is rendered and there is a message in the UI store", () => {
+    test("Then it should a mdal with a button with 'Close' text in it", () => {
+      const expectedTextButton = "Close";
+
+      renderWithProviders(wrapWithRouter(<Layout />), {
+        ui: { isLoading: false, isError: true, message: "Wrong credentials" },
+      });
+
+      const closeButton = screen.getByRole("button", {
+        name: expectedTextButton,
+      });
+
+      expect(closeButton).toBeInTheDocument();
     });
   });
 });

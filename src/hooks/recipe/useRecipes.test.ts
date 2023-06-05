@@ -1,7 +1,7 @@
 import { renderHook } from "@testing-library/react";
 import useRecipes from "./useRecipes";
 import { mockRecipesList } from "../../mocks/recipeMocks";
-import { wrapper } from "../../testUtils/testUtils";
+import { wrapperWithProvider } from "../../testUtils/testUtils";
 
 describe("Given a getRecipes function", () => {
   describe("When it is called", () => {
@@ -10,7 +10,7 @@ describe("Given a getRecipes function", () => {
         result: {
           current: { getRecipes },
         },
-      } = renderHook(() => useRecipes(), { wrapper: wrapper });
+      } = renderHook(() => useRecipes(), { wrapper: wrapperWithProvider });
 
       const recipesList = await getRecipes();
 

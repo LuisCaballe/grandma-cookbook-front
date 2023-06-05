@@ -1,18 +1,34 @@
+import { useAppDispatch, useAppSelector } from "../../store";
+import { hideFeedbackActionCreator } from "../../store/ui/uiSlice";
 import Button from "../Button/Button";
 import FeedbackStyled from "./FeedbackStyled";
 
 const Feedback = (): React.ReactElement => {
+  const dispatch = useAppDispatch();
+  const { isError, message } = useAppSelector((state) => state.ui);
+
+  const handleOnClick = () => {
+    dispatch(hideFeedbackActionCreator());
+  };
+
   return (
     <FeedbackStyled className="feedback">
       <div
-        className="feedback__container feedback__container--error"
+        className={`feedback__container feedback__container--${
+          isError ? "error" : "success"
+        }`}
         aria-label="feedback container"
       >
-        <img src="images/error.svg" alt="" />
-        <p className="feedback__text">
-          {`Oops! There's been an error removing your recipe. Please try again`}
-        </p>
-        <Button text="Close" className="feedback__button" />
+        <img
+          src={`images/${isError ? "error" : "success"}.svg`}
+          alt={`${isError ? "error" : "success"} icon`}
+        />
+        <p className="feedback__text">{message}</p>
+        <Button
+          text="Close"
+          className="feedback__button"
+          actionOnClick={handleOnClick}
+        />
       </div>
     </FeedbackStyled>
   );

@@ -1,5 +1,9 @@
 import { useAppDispatch } from "../../store";
-import { showLoadingActionCreator } from "../../store/ui/uiSlice";
+import {
+  hideLoadingActionCreator,
+  showFeedbackActionCreator,
+  showLoadingActionCreator,
+} from "../../store/ui/uiSlice";
 import { UserDataCredentials } from "../../types";
 import axios from "axios";
 
@@ -10,7 +14,7 @@ const useUser = () => {
 
   const getToken = async (
     userCredentials: UserDataCredentials
-  ): Promise<string> => {
+  ): Promise<string | undefined> => {
     try {
       dispatch(showLoadingActionCreator());
 
@@ -22,8 +26,15 @@ const useUser = () => {
       );
 
       return token;
-    } catch (error) {
-      throw new Error("Wrong credentials");
+    } catch {
+      const errorMessage = "Wrong credentials. Please, try again";
+      dispatch(
+        showFeedbackActionCreator({
+          message: errorMessage,
+          isError: true,
+        })
+      );
+      dispatch(hideLoadingActionCreator());
     }
   };
 

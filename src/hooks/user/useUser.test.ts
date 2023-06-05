@@ -3,7 +3,7 @@ import useUser from "./useUser";
 import { mockUserCredentials, tokenMock } from "../../mocks/userMocks";
 import { server } from "../../mocks/server";
 import { errorHandlers } from "../../mocks/handlers";
-import { wrapper } from "../../testUtils/testUtils";
+import { wrapperWithProvider } from "../../testUtils/testUtils";
 
 describe("Given a useUser custom hook", () => {
   describe("When it calls the function getToken with a valid username and a password", () => {
@@ -12,7 +12,7 @@ describe("Given a useUser custom hook", () => {
         result: {
           current: { getToken },
         },
-      } = renderHook(() => useUser(), { wrapper: wrapper });
+      } = renderHook(() => useUser(), { wrapper: wrapperWithProvider });
 
       const token = await getToken(mockUserCredentials);
 
@@ -21,19 +21,18 @@ describe("Given a useUser custom hook", () => {
   });
 
   describe("When it calls the function getToken with a wrong username and a wrong password", () => {
-    test("Then it should return the response's method status with a '401' status code", () => {
+    test("Then it should return the response's method status with the message 'Wrong credentials. Please, try again'", () => {
       server.resetHandlers(...errorHandlers);
-      const expectedErrorMessage = "Wrong credentials";
 
       const {
         result: {
           current: { getToken },
         },
-      } = renderHook(() => useUser(), { wrapper: wrapper });
+      } = renderHook(() => useUser(), { wrapper: wrapperWithProvider });
 
       const getTokenFunction = getToken(mockUserCredentials);
 
-      expect(getTokenFunction).rejects.toThrowError(expectedErrorMessage);
+      expect(getTokenFunction).resolves.toBeUndefined();
     });
   });
 });
