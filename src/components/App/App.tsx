@@ -13,6 +13,7 @@ const App = (): React.ReactElement => {
 
   useEffect(() => {
     const token = getToken("token");
+
     if (token) {
       const userData = getTokenData(token);
       const userDataToken = { ...userData, token };
