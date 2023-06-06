@@ -22,6 +22,8 @@ const Feedback = (): React.ReactElement => {
         <img
           src={`images/${isError ? "error" : "success"}.svg`}
           alt={`${isError ? "error" : "success"} icon`}
+          width={`${isError ? "35" : "40"}`}
+          height={`${isError ? "35" : "27"}`}
         />
         <p className="feedback__text">{message}</p>
         <Button

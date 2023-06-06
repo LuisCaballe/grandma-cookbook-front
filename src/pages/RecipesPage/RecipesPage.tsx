@@ -13,7 +13,10 @@ const RecipesPage = (): React.ReactElement => {
   useEffect(() => {
     (async () => {
       const recipesList = await getRecipes();
-      dispatch(loadRecipesActionCreator(recipesList));
+
+      if (recipesList) {
+        dispatch(loadRecipesActionCreator(recipesList));
+      }
     })();
   }, [dispatch, getRecipes]);
 
