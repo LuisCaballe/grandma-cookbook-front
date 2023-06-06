@@ -21,7 +21,7 @@ describe("Given a useUser custom hook", () => {
   });
 
   describe("When it calls the function getToken with a wrong username and a wrong password", () => {
-    test("Then it should return the response's method status with the message 'Wrong credentials. Please, try again'", () => {
+    test("Then it should resolve undefined", () => {
       server.resetHandlers(...errorHandlers);
 
       const {

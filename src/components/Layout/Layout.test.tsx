@@ -8,10 +8,7 @@ describe("Given a Layout component", () => {
       const expectedAlternativeText = "Grandma's Cookbook's logo";
 
       renderWithProviders(wrapWithRouter(<Layout />));
-
       const image = screen.getByRole("img", { name: expectedAlternativeText });
-
-      screen.debug();
 
       expect(image).toBeInTheDocument();
     });
@@ -24,7 +21,6 @@ describe("Given a Layout component", () => {
       renderWithProviders(wrapWithRouter(<Layout />), {
         ui: { isLoading: true, isError: false, message: "" },
       });
-
       const loader = screen.getByLabelText(expectedLabelText);
 
       expect(loader).toBeInTheDocument();
@@ -38,7 +34,6 @@ describe("Given a Layout component", () => {
       renderWithProviders(wrapWithRouter(<Layout />), {
         ui: { isLoading: false, isError: true, message: "Wrong credentials" },
       });
-
       const closeButton = screen.getByRole("button", {
         name: expectedTextButton,
       });
