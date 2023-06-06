@@ -3,6 +3,7 @@ import NavBarStyled from "./NavBarStyled";
 import { useAppDispatch, useAppSelector } from "../../store";
 import { logoutUserActionCreator } from "../../store/user/userSlice";
 import useLocalStorage from "../../hooks/localStorage/useLocalStorage";
+import Button from "../Button/Button";
 
 const NavBar = (): React.ReactElement => {
   const dispatch = useAppDispatch();
@@ -32,9 +33,11 @@ const NavBar = (): React.ReactElement => {
         </li>
         {isLogged && (
           <li>
-            <button className="navbar__link" onClick={logoutOnClick}>
-              Logout
-            </button>
+            <Button
+              className="navbar__link"
+              actionOnClick={logoutOnClick}
+              text="Logout"
+            />
           </li>
         )}
       </ul>
