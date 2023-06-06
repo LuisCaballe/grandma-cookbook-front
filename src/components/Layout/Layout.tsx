@@ -11,12 +11,12 @@ const Layout = (): React.ReactElement => {
 
   return (
     <>
-      {showFeedback && <Feedback />}
-      {isLoading && <Loader />}
       <ContainerStyled>
         <Header />
         <Outlet />
       </ContainerStyled>
+      {showFeedback && <Feedback />}
+      {isLoading && <Loader />}
     </>
   );
 };
