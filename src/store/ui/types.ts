@@ -1,6 +1,7 @@
 export interface UiStructure {
   isLoading: boolean;
   isError: boolean;
+  showFeedback: boolean;
   message: string;
 }
 
