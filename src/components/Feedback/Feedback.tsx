@@ -25,7 +25,7 @@ const Feedback = (): React.ReactElement => {
           width={`${isError ? "35" : "40"}`}
           height={`${isError ? "35" : "27"}`}
         />
-        <p className="feedback__text">{message}</p>
+        <span className="feedback__text">{message}</span>
         <Button
           text="Close"
           className="feedback__button"

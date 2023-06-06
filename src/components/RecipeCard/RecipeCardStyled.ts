@@ -27,7 +27,7 @@ const RecipeCardStyled = styled.article`
       color: ${(props) => props.theme.colors.primary};
     }
 
-    &__cercle-button {
+    &__circle-button {
       position: absolute;
       right: 10px;
       top: 10px;

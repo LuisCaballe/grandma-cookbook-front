@@ -9,7 +9,7 @@ describe("Given a RecipeCard component", () => {
       const recipeName = "Patatas fritas";
       const mockRecipe = getRecipeMock({ name: recipeName });
 
-      renderWithProviders(<RecipeCard recipe={mockRecipe} />);
+      renderWithProviders(<RecipeCard recipe={mockRecipe} isLazy="lazy" />);
       const heading = screen.getByRole("heading", {
         level: 2,
         name: recipeName,

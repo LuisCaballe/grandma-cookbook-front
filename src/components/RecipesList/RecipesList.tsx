@@ -7,10 +7,12 @@ const RecipesList = (): React.ReactElement => {
 
   return (
     <RecipesListSyled>
-      {recipes.map((recipe) => (
+      {recipes.map((recipe, position) => (
         <li key={recipe.id}>
-          <link rel="preload" as="image" href={recipe.imageUrl}></link>
-          <RecipeCard recipe={recipe} />
+          <RecipeCard
+            recipe={recipe}
+            isLazy={position === 0 ? "eager" : "lazy"}
+          />
         </li>
       ))}
     </RecipesListSyled>
