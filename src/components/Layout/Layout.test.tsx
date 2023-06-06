@@ -19,7 +19,12 @@ describe("Given a Layout component", () => {
       const expectedLabelText = "loading spinner";
 
       renderWithProviders(wrapWithRouter(<Layout />), {
-        ui: { isLoading: true, isError: false, message: "" },
+        ui: {
+          isLoading: true,
+          isError: false,
+          message: "",
+          showFeedback: false,
+        },
       });
       const loader = screen.getByLabelText(expectedLabelText);
 
@@ -32,7 +37,12 @@ describe("Given a Layout component", () => {
       const expectedTextButton = "Close";
 
       renderWithProviders(wrapWithRouter(<Layout />), {
-        ui: { isLoading: false, isError: true, message: "Wrong credentials" },
+        ui: {
+          isLoading: false,
+          isError: true,
+          message: "Wrong credentials",
+          showFeedback: true,
+        },
       });
       const closeButton = screen.getByRole("button", {
         name: expectedTextButton,

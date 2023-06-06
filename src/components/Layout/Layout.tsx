@@ -7,11 +7,11 @@ import Feedback from "../Feedback/Feedback";
 
 const Layout = (): React.ReactElement => {
   const isLoading = useAppSelector((state) => state.ui.isLoading);
-  const message = useAppSelector((state) => state.ui.message);
+  const showFeedback = useAppSelector((state) => state.ui.showFeedback);
 
   return (
     <>
-      {message && <Feedback />}
+      {showFeedback && <Feedback />}
       {isLoading && <Loader />}
       <ContainerStyled>
         <Header />

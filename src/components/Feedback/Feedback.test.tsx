@@ -19,7 +19,12 @@ describe("Given a Feedback component", () => {
       const textButton = "Close";
 
       renderWithProviders(<Feedback />, {
-        ui: { isLoading: false, isError: true, message: "Wrong credentials" },
+        ui: {
+          isLoading: false,
+          isError: true,
+          message: "Wrong credentials",
+          showFeedback: true,
+        },
       });
 
       const closeButton = screen.getByRole("button", { name: textButton });

@@ -12,11 +12,13 @@ describe("Given a showLoading reducer", () => {
   describe("When it receives the current UI state and a showLoading action", () => {
     test("Then it should return the new UI state with isLoading property set at true", () => {
       const currentUiState: UiStructure = {
+        showFeedback: false,
         isLoading: false,
         isError: false,
         message: "",
       };
       const expectedUiState: UiStructure = {
+        showFeedback: false,
         isLoading: true,
         isError: false,
         message: "",
@@ -33,11 +35,13 @@ describe("Given a hideLoading reducer", () => {
   describe("When it receives the current UI state and a hideLoading action", () => {
     test("Then it should return the new UI state with isLoading property set at false", () => {
       const currentUiState: UiStructure = {
+        showFeedback: false,
         isLoading: true,
         isError: false,
         message: "",
       };
       const expectedUiState: UiStructure = {
+        showFeedback: false,
         isLoading: false,
         isError: false,
         message: "",
@@ -54,11 +58,13 @@ describe("Given a showFeedback reducer", () => {
   describe("When it receives the current UI state and a showFeedback action with the message 'Wrong credentials'", () => {
     test("Then it should return the new UI state with the message 'Wrong credentials'", () => {
       const currentUiState: UiStructure = {
+        showFeedback: false,
         isLoading: false,
         isError: false,
         message: "",
       };
       const expectedUiState: UiStructure = {
+        showFeedback: true,
         isLoading: false,
         isError: true,
         message: "Wrong credentials",
@@ -82,11 +88,13 @@ describe("Given a hideFeedback reducer", () => {
   describe("When it receives the current UI state and a hideFeedback action", () => {
     test("Then it should return the new UI state with and empty message and isError set to false", () => {
       const currentUiState: UiStructure = {
+        showFeedback: true,
         isLoading: false,
         isError: true,
         message: "Wrong credentials",
       };
       const expectedUiState: UiStructure = {
+        showFeedback: false,
         isLoading: false,
         isError: false,
         message: "",
