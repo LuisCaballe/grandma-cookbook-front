@@ -25,7 +25,8 @@ describe("Given a LoginPage page", () => {
   });
 
   describe("When the user submit the form with a valid credentials", () => {
-    test("Then it should show a delte button from one recipe", async () => {
+    test("Then it should show a heading that contains the text 'recipes'", async () => {
+      const expectedHeadingText = "recipes";
       const mockUser: UserDataCredentials = {
         username: "admin",
         password: "admin",
@@ -54,9 +55,9 @@ describe("Given a LoginPage page", () => {
       await userEvent.type(passwordTextField, mockUser.password);
       await userEvent.click(button);
 
-      const deleteButtons = screen.getAllByAltText("Delete button");
+      const heading = screen.getByRole("heading", { level: 1 });
 
-      expect(deleteButtons[0]).toBeInTheDocument();
+      expect(heading.textContent).toContain(expectedHeadingText);
     });
   });
 });
