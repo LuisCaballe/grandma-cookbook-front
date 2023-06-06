@@ -4,13 +4,17 @@ import RecipeCardStyled from "./RecipeCardStyled";
 
 interface RecipeCardProps {
   recipe: RecipeStructure;
+  isLazy: "eager" | "lazy";
 }
 
-const RecipeCard = ({ recipe }: RecipeCardProps): React.ReactElement => {
+const RecipeCard = ({
+  recipe,
+  isLazy,
+}: RecipeCardProps): React.ReactElement => {
   return (
     <RecipeCardStyled className="recipe-card">
       <Button
-        className="recipe-card__cercle-button"
+        className="recipe-card__circle-button"
         icon="images/delete-btn.svg"
         altText="Delete button"
         width="48"
@@ -22,6 +26,7 @@ const RecipeCard = ({ recipe }: RecipeCardProps): React.ReactElement => {
         alt={`${recipe.name} recipe`}
         width="260"
         height="280"
+        loading={isLazy}
       />
       <div className="recipe-card__text-container">
         <h2 className="recipe-card__title">{recipe.name}</h2>
