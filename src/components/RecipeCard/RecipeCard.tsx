@@ -5,11 +5,13 @@ import RecipeCardStyled from "./RecipeCardStyled";
 interface RecipeCardProps {
   recipe: RecipeStructure;
   isLazy: "eager" | "lazy";
+  actionOnClick: (recipeId: string) => void;
 }
 
 const RecipeCard = ({
   recipe,
   isLazy,
+  actionOnClick,
 }: RecipeCardProps): React.ReactElement => {
   return (
     <RecipeCardStyled className="recipe-card">
@@ -19,6 +21,7 @@ const RecipeCard = ({
         altText="Delete button"
         width="48"
         height="48"
+        actionOnClick={() => actionOnClick(recipe.id)}
       />
       <img
         className="recipe-card__image"
