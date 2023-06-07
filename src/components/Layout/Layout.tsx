@@ -7,7 +7,9 @@ import Feedback from "../Feedback/Feedback";
 
 const Layout = (): React.ReactElement => {
   const isLoading = useAppSelector((state) => state.ui.isLoading);
-  const showFeedback = useAppSelector((state) => state.ui.showFeedback);
+  const showFeedback = useAppSelector(
+    (state) => state.ui.feedbackData.showFeedback
+  );
 
   return (
     <>

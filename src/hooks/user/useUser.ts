@@ -30,8 +30,9 @@ const useUser = () => {
       const errorMessage = "Wrong credentials. Please, try again";
       dispatch(
         showFeedbackActionCreator({
-          message: errorMessage,
+          showFeedback: true,
           isError: true,
+          message: errorMessage,
         })
       );
       dispatch(hideLoadingActionCreator());

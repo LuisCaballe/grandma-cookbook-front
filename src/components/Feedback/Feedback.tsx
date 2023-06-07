@@ -5,7 +5,9 @@ import FeedbackStyled from "./FeedbackStyled";
 
 const Feedback = (): React.ReactElement => {
   const dispatch = useAppDispatch();
-  const { isError, message } = useAppSelector((state) => state.ui);
+  const {
+    feedbackData: { isError, message },
+  } = useAppSelector((state) => state.ui);
 
   const handleOnClick = () => {
     dispatch(hideFeedbackActionCreator());

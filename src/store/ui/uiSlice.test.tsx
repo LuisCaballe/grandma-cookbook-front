@@ -1,5 +1,4 @@
-import { FeedbackPayloadStructure } from "./types";
-import { UiStructure } from "./types";
+import { FeedbackDataStructure, UiStructure } from "./types";
 import {
   hideFeedbackActionCreator,
   hideLoadingActionCreator,
@@ -12,16 +11,20 @@ describe("Given a showLoading reducer", () => {
   describe("When it receives the current UI state and a showLoading action", () => {
     test("Then it should return the new UI state with isLoading property set at true", () => {
       const currentUiState: UiStructure = {
-        showFeedback: false,
         isLoading: false,
-        isError: false,
-        message: "",
+        feedbackData: {
+          showFeedback: false,
+          isError: false,
+          message: "",
+        },
       };
       const expectedUiState: UiStructure = {
-        showFeedback: false,
         isLoading: true,
-        isError: false,
-        message: "",
+        feedbackData: {
+          showFeedback: false,
+          isError: false,
+          message: "",
+        },
       };
 
       const newUiState = uiReducer(currentUiState, showLoadingActionCreator());
@@ -35,16 +38,20 @@ describe("Given a hideLoading reducer", () => {
   describe("When it receives the current UI state and a hideLoading action", () => {
     test("Then it should return the new UI state with isLoading property set at false", () => {
       const currentUiState: UiStructure = {
-        showFeedback: false,
         isLoading: true,
-        isError: false,
-        message: "",
+        feedbackData: {
+          showFeedback: false,
+          isError: false,
+          message: "",
+        },
       };
       const expectedUiState: UiStructure = {
-        showFeedback: false,
         isLoading: false,
-        isError: false,
-        message: "",
+        feedbackData: {
+          showFeedback: false,
+          isError: false,
+          message: "",
+        },
       };
 
       const newUiState = uiReducer(currentUiState, hideLoadingActionCreator());
@@ -58,20 +65,25 @@ describe("Given a showFeedback reducer", () => {
   describe("When it receives the current UI state and a showFeedback action with the message 'Wrong credentials'", () => {
     test("Then it should return the new UI state with the message 'Wrong credentials'", () => {
       const currentUiState: UiStructure = {
-        showFeedback: false,
         isLoading: false,
-        isError: false,
-        message: "",
+        feedbackData: {
+          showFeedback: false,
+          isError: false,
+          message: "",
+        },
       };
       const expectedUiState: UiStructure = {
-        showFeedback: true,
         isLoading: false,
-        isError: true,
-        message: "Wrong credentials",
+        feedbackData: {
+          showFeedback: true,
+          isError: true,
+          message: "Wrong credentials",
+        },
       };
-      const feedbackPayload: FeedbackPayloadStructure = {
+      const feedbackPayload: FeedbackDataStructure = {
         isError: true,
         message: "Wrong credentials",
+        showFeedback: true,
       };
 
       const newUiState = uiReducer(
@@ -88,16 +100,20 @@ describe("Given a hideFeedback reducer", () => {
   describe("When it receives the current UI state and a hideFeedback action", () => {
     test("Then it should return the new UI state with and empty message and isError set to false", () => {
       const currentUiState: UiStructure = {
-        showFeedback: true,
         isLoading: false,
-        isError: true,
-        message: "Wrong credentials",
+        feedbackData: {
+          showFeedback: true,
+          isError: true,
+          message: "Wrong credentials",
+        },
       };
       const expectedUiState: UiStructure = {
-        showFeedback: false,
         isLoading: false,
-        isError: false,
-        message: "",
+        feedbackData: {
+          showFeedback: false,
+          isError: false,
+          message: "",
+        },
       };
 
       const newUiState = uiReducer(currentUiState, hideFeedbackActionCreator());
