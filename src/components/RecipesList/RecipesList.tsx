@@ -1,3 +1,4 @@
+import useRecipes from "../../hooks/recipes/useRecipes";
 import { useAppDispatch, useAppSelector } from "../../store";
 import { removeRecipeActionCreator } from "../../store/recipe/recipeSlice";
 import RecipeCard from "../RecipeCard/RecipeCard";
@@ -6,9 +7,12 @@ import RecipesListSyled from "./RecipesListStyled";
 const RecipesList = (): React.ReactElement => {
   const recipes = useAppSelector((state) => state.recipe.recipes);
   const dispatch = useAppDispatch();
+  const { removeRecipe } = useRecipes();
 
-  const removeOnClick = (recipeId: string): void => {
-    dispatch(removeRecipeActionCreator(recipeId));
+  const removeOnClick = async (recipeId: string) => {
+    const isRemoved = await removeRecipe(recipeId);
+
+    isRemoved && dispatch(removeRecipeActionCreator(recipeId));
   };
 
   return (

@@ -35,6 +35,7 @@ const useRecipes = () => {
       return recipes;
     } catch (error) {
       const errorMessage = "Recipes couldn't be load. Please, try again";
+      dispatch(hideLoadingActionCreator());
       dispatch(
         showFeedbackActionCreator({
           showFeedback: true,
@@ -42,13 +43,40 @@ const useRecipes = () => {
           isError: true,
         })
       );
-      dispatch(hideLoadingActionCreator());
     }
   }, [dispatch, request]);
 
-  const removeRecipe = (recipeId: string) => {
+  const removeRecipe = async (
+    recipeId: string
+  ): Promise<boolean | undefined> => {
     dispatch(showLoadingActionCreator());
-    axios.delete(`${apiUrl}/recipes${recipeId}`, request);
+
+    try {
+      await axios.delete(`${apiUrl}/recipes/${recipeId}`, request);
+
+      dispatch(hideLoadingActionCreator());
+
+      dispatch(
+        showFeedbackActionCreator({
+          isError: false,
+          message: "Recipe removed",
+          showFeedback: true,
+        })
+      );
+      const isRemoved = true;
+
+      return isRemoved;
+    } catch (error) {
+      dispatch(hideLoadingActionCreator());
+      dispatch(
+        showFeedbackActionCreator({
+          isError: true,
+          showFeedback: true,
+          message:
+            "Oops! There's been an error removing your recipe. Please try again",
+        })
+      );
+    }
   };
 
   return { getRecipes, removeRecipe };
