@@ -1,11 +1,9 @@
-export interface UiStructure {
-  isLoading: boolean;
+export interface FeedbackDataStructure {
   isError: boolean;
   showFeedback: boolean;
   message: string;
 }
-
-export interface FeedbackPayloadStructure {
-  message: string;
-  isError: boolean;
+export interface UiStructure {
+  isLoading: boolean;
+  feedbackData: FeedbackDataStructure;
 }

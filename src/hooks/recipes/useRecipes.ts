@@ -37,6 +37,7 @@ const useRecipes = () => {
       const errorMessage = "Recipes couldn't be load. Please, try again";
       dispatch(
         showFeedbackActionCreator({
+          showFeedback: true,
           message: errorMessage,
           isError: true,
         })

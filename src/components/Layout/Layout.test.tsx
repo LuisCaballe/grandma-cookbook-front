@@ -21,9 +21,11 @@ describe("Given a Layout component", () => {
       renderWithProviders(wrapWithRouter(<Layout />), {
         ui: {
           isLoading: true,
-          isError: false,
-          message: "",
-          showFeedback: false,
+          feedbackData: {
+            isError: false,
+            message: "",
+            showFeedback: false,
+          },
         },
       });
       const loader = screen.getByLabelText(expectedLabelText);
@@ -39,9 +41,11 @@ describe("Given a Layout component", () => {
       renderWithProviders(wrapWithRouter(<Layout />), {
         ui: {
           isLoading: false,
-          isError: true,
-          message: "Wrong credentials",
-          showFeedback: true,
+          feedbackData: {
+            isError: true,
+            message: "Wrong credentials",
+            showFeedback: true,
+          },
         },
       });
       const closeButton = screen.getByRole("button", {

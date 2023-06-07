@@ -21,9 +21,11 @@ describe("Given a Feedback component", () => {
       renderWithProviders(<Feedback />, {
         ui: {
           isLoading: false,
-          isError: true,
-          message: "Wrong credentials",
-          showFeedback: true,
+          feedbackData: {
+            isError: true,
+            message: "Wrong credentials",
+            showFeedback: true,
+          },
         },
       });
 
@@ -33,7 +35,7 @@ describe("Given a Feedback component", () => {
 
       const testStore = store.getState();
 
-      expect(testStore.ui.message).toBeFalsy();
+      expect(testStore.ui.feedbackData.message).toBeFalsy();
     });
   });
 });
