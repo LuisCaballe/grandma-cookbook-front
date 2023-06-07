@@ -25,8 +25,8 @@ describe("Given a LoginPage page", () => {
   });
 
   describe("When the user submit the form with a valid credentials", () => {
-    test("Then it should show a heading that contains the text 'recipes'", async () => {
-      const expectedHeadingText = "recipes";
+    test("Then it should show a heading with the text 'Admin's recipes'", async () => {
+      const expectedHeadingText = "Admin's recipes";
       const mockUser: UserDataCredentials = {
         username: "admin",
         password: "admin",
@@ -43,7 +43,9 @@ describe("Given a LoginPage page", () => {
       ];
       const router = createMemoryRouter(routes);
 
-      renderWithProviders(<RouterProvider router={router} />);
+      renderWithProviders(<RouterProvider router={router} />, {
+        user: { name: "Admin", id: "1", token: "1", isLogged: true },
+      });
 
       const usernameLabelText = "Username :";
       const passwordLabelText = "Password :";
@@ -57,7 +59,7 @@ describe("Given a LoginPage page", () => {
 
       const heading = screen.getByRole("heading", { level: 1 });
 
-      expect(heading.textContent).toContain(expectedHeadingText);
+      expect(heading.textContent).toBe(expectedHeadingText);
     });
   });
 });
