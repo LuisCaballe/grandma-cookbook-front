@@ -16,8 +16,21 @@ const recipeSlice = createSlice({
       ...currentRecipesState,
       recipes: action.payload,
     }),
+
+    removeRecipe: (
+      currentRecipesState: RecipesState,
+      action: PayloadAction<string>
+    ): RecipesState => ({
+      ...currentRecipesState,
+      recipes: currentRecipesState.recipes.filter(
+        (recipe) => recipe.id !== action.payload
+      ),
+    }),
   },
 });
 
-export const { loadRecipes: loadRecipesActionCreator } = recipeSlice.actions;
+export const {
+  loadRecipes: loadRecipesActionCreator,
+  removeRecipe: removeRecipeActionCreator,
+} = recipeSlice.actions;
 export const recipeReducer = recipeSlice.reducer;

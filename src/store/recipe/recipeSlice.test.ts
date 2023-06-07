@@ -1,5 +1,9 @@
 import { mockRecipesList } from "../../mocks/recipeMocks";
-import { loadRecipesActionCreator, recipeReducer } from "./recipeSlice";
+import {
+  loadRecipesActionCreator,
+  recipeReducer,
+  removeRecipeActionCreator,
+} from "./recipeSlice";
 import { RecipeStructure, RecipesState } from "./types";
 
 describe("Given a recipeReducer reducer", () => {
@@ -8,9 +12,7 @@ describe("Given a recipeReducer reducer", () => {
       const currentRecipesState: RecipesState = {
         recipes: [],
       };
-
       const newRecipes: RecipeStructure[] = mockRecipesList;
-
       const expectedRecipesState: RecipesState = {
         recipes: newRecipes,
       };
@@ -19,6 +21,24 @@ describe("Given a recipeReducer reducer", () => {
       const newRecipesState = recipeReducer(
         currentRecipesState,
         loadRecipesAction
+      );
+
+      expect(newRecipesState).toStrictEqual(expectedRecipesState);
+    });
+  });
+
+  describe("When it receives a current recipes state and a removeRecipe action with an id of a recipe", () => {
+    test("Then it should return the list of recipes without the recipe with received id", () => {
+      const currentRecipesState: RecipesState = {
+        recipes: mockRecipesList,
+      };
+      const expectedRecipesState: RecipesState = {
+        recipes: mockRecipesList.slice(1),
+      };
+
+      const newRecipesState = recipeReducer(
+        currentRecipesState,
+        removeRecipeActionCreator(mockRecipesList[0].id)
       );
 
       expect(newRecipesState).toStrictEqual(expectedRecipesState);
