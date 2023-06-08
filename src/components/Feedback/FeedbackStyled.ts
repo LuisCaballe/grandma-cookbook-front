@@ -2,7 +2,7 @@ import styled from "styled-components";
 
 const FeedbackStyled = styled.div`
   background-color: ${(props) => props.theme.colors.lightBackground}bb;
-  position: absolute;
+  position: fixed;
   width: 100vw;
   height: 100vh;
   display: flex;

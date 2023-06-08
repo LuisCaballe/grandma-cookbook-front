@@ -5,7 +5,6 @@ import {
 } from "../../factories/recipe/recipeFactory";
 import { renderWithProviders } from "../../testUtils/testUtils";
 import RecipesList from "./RecipesList";
-import RecipesPage from "../../pages/RecipesPage/RecipesPage";
 import userEvent from "@testing-library/user-event";
 import { mockRecipesList } from "../../mocks/recipeMocks";
 
@@ -44,7 +43,7 @@ describe("Given a RecipesList component", () => {
 
   describe("When it is rendered with a list of recipes and the user clicks on the delete button of one recipe", () => {
     test("Then it should remove the clicked recipe from the list", async () => {
-      renderWithProviders(<RecipesPage />, {
+      renderWithProviders(<RecipesList />, {
         recipe: { recipes: mockRecipesList },
       });
 

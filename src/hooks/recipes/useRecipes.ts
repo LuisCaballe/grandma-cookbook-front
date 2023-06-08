@@ -8,6 +8,7 @@ import {
   showFeedbackActionCreator,
   showLoadingActionCreator,
 } from "../../store/ui/uiSlice";
+import { removeRecipeActionCreator } from "../../store/recipe/recipeSlice";
 
 const useRecipes = () => {
   const token = useAppSelector((state) => state.user.token);
@@ -35,6 +36,7 @@ const useRecipes = () => {
       return recipes;
     } catch (error) {
       const errorMessage = "Recipes couldn't be load. Please, try again";
+      dispatch(hideLoadingActionCreator());
       dispatch(
         showFeedbackActionCreator({
           showFeedback: true,
@@ -42,13 +44,37 @@ const useRecipes = () => {
           isError: true,
         })
       );
-      dispatch(hideLoadingActionCreator());
     }
   }, [dispatch, request]);
 
-  const removeRecipe = (recipeId: string) => {
+  const removeRecipe = async (recipeId: string): Promise<void> => {
     dispatch(showLoadingActionCreator());
-    axios.delete(`${apiUrl}/recipes${recipeId}`, request);
+
+    try {
+      await axios.delete(`${apiUrl}/recipes/${recipeId}`, request);
+
+      dispatch(hideLoadingActionCreator());
+
+      dispatch(
+        showFeedbackActionCreator({
+          isError: false,
+          message: "Recipe removed",
+          showFeedback: true,
+        })
+      );
+
+      dispatch(removeRecipeActionCreator(recipeId));
+    } catch (error) {
+      dispatch(hideLoadingActionCreator());
+      dispatch(
+        showFeedbackActionCreator({
+          isError: true,
+          showFeedback: true,
+          message:
+            "Oops! There's been an error removing your recipe. Please try again",
+        })
+      );
+    }
   };
 
   return { getRecipes, removeRecipe };
