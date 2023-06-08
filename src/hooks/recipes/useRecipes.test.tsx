@@ -4,14 +4,10 @@ import { mockRecipesList } from "../../mocks/recipeMocks";
 import {
   renderWithProviders,
   wrapperWithProvider,
+  wrapWithRouter,
 } from "../../testUtils/testUtils";
 import { server } from "../../mocks/server";
 import { errorHandlers, handlers } from "../../mocks/handlers";
-import {
-  RouteObject,
-  RouterProvider,
-  createMemoryRouter,
-} from "react-router-dom";
 import { vi } from "vitest";
 import Layout from "../../components/Layout/Layout";
 
@@ -46,10 +42,9 @@ describe("Given a getRecipes function", () => {
           current: { getRecipes },
         },
       } = renderHook(() => useRecipes(), { wrapper: wrapperWithProvider });
-      const routes: RouteObject[] = [{ path: "/", element: <Layout /> }];
-      const router = createMemoryRouter(routes);
 
-      renderWithProviders(<RouterProvider router={router} />);
+      renderWithProviders(wrapWithRouter(<Layout />));
+
       await getRecipes();
       const icon = screen.getByAltText(expectedAltText);
 
@@ -69,13 +64,9 @@ describe("Given a removeRecipe function", () => {
         },
       } = renderHook(() => useRecipes(), { wrapper: wrapperWithProvider });
 
-      const routes: RouteObject[] = [{ path: "/", element: <Layout /> }];
-      const router = createMemoryRouter(routes);
-
-      renderWithProviders(<RouterProvider router={router} />);
+      renderWithProviders(wrapWithRouter(<Layout />));
 
       await removeRecipe(mockRecipesList[0].id);
-
       const successIcon = screen.getByAltText("success icon");
 
       expect(successIcon).toBeInTheDocument();
@@ -94,10 +85,7 @@ describe("Given a removeRecipe function", () => {
         wrapper: wrapperWithProvider,
       });
 
-      const routes: RouteObject[] = [{ path: "/", element: <Layout /> }];
-      const router = createMemoryRouter(routes);
-
-      renderWithProviders(<RouterProvider router={router} />);
+      renderWithProviders(wrapWithRouter(<Layout />));
 
       await removeRecipe(mockRecipesList[0].id);
       const errorIcon = screen.getByAltText("error icon");
