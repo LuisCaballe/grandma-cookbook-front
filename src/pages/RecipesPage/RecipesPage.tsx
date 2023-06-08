@@ -16,6 +16,17 @@ const RecipesPage = (): React.ReactElement => {
 
       if (recipesList) {
         dispatch(loadRecipesActionCreator(recipesList));
+
+        const firstImageUrl = recipesList[0].imageUrl;
+
+        const preconnectElement = await document.createElement("link");
+        preconnectElement.rel = "preload";
+        preconnectElement.as = "image";
+        preconnectElement.href = firstImageUrl;
+
+        const parent = document.head;
+        const firstChild = document.head.firstChild;
+        parent.insertBefore(preconnectElement, firstChild);
       }
     })();
   }, [dispatch, getRecipes]);
