@@ -32,6 +32,14 @@ const Form = ({ buttonText }: FormProps): React.ReactElement => {
     });
   };
 
+  const isEnable =
+    receivedRecipeData.name !== "" &&
+    receivedRecipeData.imageUrl !== "" &&
+    receivedRecipeData.difficulty !== "" &&
+    receivedRecipeData.cookingTime !== 0 &&
+    receivedRecipeData.ingredients !== "" &&
+    receivedRecipeData.directions !== "";
+
   return (
     <FormStyled className="form" autoComplete="off">
       <div className="form__control">
@@ -108,7 +116,12 @@ const Form = ({ buttonText }: FormProps): React.ReactElement => {
           value={receivedRecipeData.directions}
         />
       </div>
-      <Button type="submit" className="form__button" text={buttonText} />
+      <Button
+        type="submit"
+        className="form__button"
+        text={buttonText}
+        isDisabled={!isEnable}
+      />
     </FormStyled>
   );
 };

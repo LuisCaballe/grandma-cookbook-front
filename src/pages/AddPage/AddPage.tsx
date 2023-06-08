@@ -10,7 +10,7 @@ const AddPage = (): React.ReactElement => {
           Fill in the form with your delicious recipe and add it to your
           collection.
         </p>
-        <Form />
+        <Form buttonText="Add" />
       </section>
     </AddPageStyled>
   );
