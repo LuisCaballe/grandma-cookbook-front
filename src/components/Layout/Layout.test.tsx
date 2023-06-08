@@ -35,7 +35,7 @@ describe("Given a Layout component", () => {
   });
 
   describe("When it is rendered and there is a message in the UI store", () => {
-    test("Then it should a mdal with a button with 'Close' text in it", () => {
+    test("Then it should a modal with a button with 'Close' text in it", () => {
       const expectedTextButton = "Close";
 
       renderWithProviders(wrapWithRouter(<Layout />), {
