@@ -1,7 +1,11 @@
 import Button from "../Button/Button";
 import FormStyled from "../shared/FromStyled";
 
-const Form = (): React.ReactElement => {
+interface FormProps {
+  buttonText: string;
+}
+
+const Form = ({ buttonText }: FormProps): React.ReactElement => {
   return (
     <FormStyled className="form">
       <div className="form__control">
@@ -48,7 +52,7 @@ const Form = (): React.ReactElement => {
           className="form__textarea form__textarea--big"
         />
       </div>
-      <Button type="submit" className="form__button" text="Add" />
+      <Button type="submit" className="form__button" text={buttonText} />
     </FormStyled>
   );
 };
