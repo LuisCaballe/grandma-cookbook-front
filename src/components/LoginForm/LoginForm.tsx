@@ -34,7 +34,11 @@ const LoginForm = ({ actionOnSubmit }: LoginFormProps): React.ReactElement => {
   };
 
   return (
-    <LoginFormStyled className="login-form" onSubmit={handleSubmit}>
+    <LoginFormStyled
+      className="login-form"
+      onSubmit={handleSubmit}
+      autoComplete="off"
+    >
       <h1 className="login-form__title">Login</h1>
       <div className="login-form__control">
         <label htmlFor="username">Username :</label>

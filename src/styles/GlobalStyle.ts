@@ -48,7 +48,9 @@ button {
   padding: 0;
 }
 
-input {
+input,
+textarea,
+select {
   font: inherit;
   border: none;
 }

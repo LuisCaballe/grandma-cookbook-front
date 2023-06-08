@@ -1,3 +1,4 @@
+import Form from "../../components/Form/Form";
 import AddPageStyled from "./AddPageStyled";
 
 const AddPage = (): React.ReactElement => {
@@ -9,6 +10,7 @@ const AddPage = (): React.ReactElement => {
           Fill in the form with your delicious recipe and add it to your
           collection.
         </p>
+        <Form buttonText="Add" />
       </section>
     </AddPageStyled>
   );
