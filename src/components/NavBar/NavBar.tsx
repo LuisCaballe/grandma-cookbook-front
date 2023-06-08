@@ -27,7 +27,7 @@ const NavBar = (): React.ReactElement => {
           </NavLink>
         </li>
         <li>
-          <NavLink className="navbar__link" to="/add-recipe">
+          <NavLink className="navbar__link" to="/add">
             Add
           </NavLink>
         </li>
