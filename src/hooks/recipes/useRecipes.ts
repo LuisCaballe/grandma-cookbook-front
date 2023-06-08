@@ -8,6 +8,7 @@ import {
   showFeedbackActionCreator,
   showLoadingActionCreator,
 } from "../../store/ui/uiSlice";
+import { removeRecipeActionCreator } from "../../store/recipe/recipeSlice";
 
 const useRecipes = () => {
   const token = useAppSelector((state) => state.user.token);
@@ -46,9 +47,7 @@ const useRecipes = () => {
     }
   }, [dispatch, request]);
 
-  const removeRecipe = async (
-    recipeId: string
-  ): Promise<boolean | undefined> => {
+  const removeRecipe = async (recipeId: string): Promise<void> => {
     dispatch(showLoadingActionCreator());
 
     try {
@@ -63,9 +62,8 @@ const useRecipes = () => {
           showFeedback: true,
         })
       );
-      const isRemoved = true;
 
-      return isRemoved;
+      dispatch(removeRecipeActionCreator(recipeId));
     } catch (error) {
       dispatch(hideLoadingActionCreator());
       dispatch(

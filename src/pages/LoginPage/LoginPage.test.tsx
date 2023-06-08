@@ -57,9 +57,12 @@ describe("Given a LoginPage page", () => {
       await userEvent.type(passwordTextField, mockUser.password);
       await userEvent.click(button);
 
-      const heading = screen.getByRole("heading", { level: 1 });
+      const heading = screen.getByRole("heading", {
+        level: 1,
+        name: expectedHeadingText,
+      });
 
-      expect(heading.textContent).toBe(expectedHeadingText);
+      expect(heading).toBeInTheDocument();
     });
   });
 });
