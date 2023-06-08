@@ -77,4 +77,42 @@ describe("Given a Form component", () => {
       expect(difficultyField).toHaveValue(expectedOption);
     });
   });
+
+  describe("When it is rendered and the inputs fields are empty", () => {
+    test("Then the button should be disabled", () => {
+      renderWithProviders(<Form buttonText="Add" />);
+
+      const button = screen.getByRole("button");
+
+      expect(button).toBeDisabled();
+    });
+  });
+
+  describe("When it is rendered and the user fills in all the inputs fields", () => {
+    test("Then the button should be enabled", async () => {
+      renderWithProviders(<Form buttonText="Add" />);
+
+      const button = screen.getByRole("button");
+
+      const expectedTime = 45;
+      const expectedOption = "Easy";
+      const expectedTextExample = "test";
+
+      const nameField = screen.getByLabelText(labels[0]);
+      const imageUrlField = screen.getByLabelText(labels[1]);
+      const ingredientsField = screen.getByLabelText(labels[2]);
+      const directionsField = screen.getByLabelText(labels[3]);
+      const cookingTimeField = screen.getByLabelText(labels[4]);
+      const difficultyField = screen.getByLabelText(labels[5]);
+
+      await userEvent.type(nameField, expectedTextExample);
+      await userEvent.type(imageUrlField, expectedTextExample);
+      await userEvent.type(ingredientsField, expectedTextExample);
+      await userEvent.type(directionsField, expectedTextExample);
+      await userEvent.selectOptions(difficultyField, expectedOption);
+      await userEvent.type(cookingTimeField, expectedTime.toString());
+
+      expect(button).toBeEnabled();
+    });
+  });
 });
