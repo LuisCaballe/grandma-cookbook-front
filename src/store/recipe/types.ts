@@ -5,8 +5,8 @@ export interface RecipeStructure {
   directions: string;
   difficulty: string;
   cookingTime: number;
-  user: string;
-  id: string;
+  user?: string;
+  id?: string;
 }
 
 export interface RecipesState {
