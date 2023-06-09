@@ -66,7 +66,7 @@ describe("Given a removeRecipe function", () => {
 
       renderWithProviders(wrapWithRouter(<Layout />));
 
-      await removeRecipe(mockRecipesList[0].id);
+      await removeRecipe(mockRecipesList[0].id as string);
       const successIcon = screen.getByAltText("success icon");
 
       expect(successIcon).toBeInTheDocument();
@@ -87,7 +87,7 @@ describe("Given a removeRecipe function", () => {
 
       renderWithProviders(wrapWithRouter(<Layout />));
 
-      await removeRecipe(mockRecipesList[0].id);
+      await removeRecipe(mockRecipesList[0].id as string);
       const errorIcon = screen.getByAltText("error icon");
 
       expect(errorIcon).toBeInTheDocument();

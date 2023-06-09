@@ -21,7 +21,7 @@ const RecipeCard = ({
         altText="Delete button"
         width="48"
         height="48"
-        actionOnClick={() => actionOnClick(recipe.id)}
+        actionOnClick={() => actionOnClick(recipe.id as string)}
       />
       <img
         className="recipe-card__image"
