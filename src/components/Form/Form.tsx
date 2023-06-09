@@ -70,7 +70,7 @@ const Form = ({
         </label>
         <input
           id="imageUrl"
-          type="text"
+          type="url"
           className="form__input"
           onChange={onChangeData}
           value={receivedRecipeData.imageUrl}

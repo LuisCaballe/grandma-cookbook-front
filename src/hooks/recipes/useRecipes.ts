@@ -77,7 +77,42 @@ const useRecipes = () => {
     }
   };
 
-  return { getRecipes, removeRecipe };
+  const addRecipe = async (
+    newRecipe: RecipeStructure
+  ): Promise<RecipeStructure | undefined> => {
+    try {
+      dispatch(showLoadingActionCreator());
+      const { data } = await axios.post<{ recipe: RecipeStructure }>(
+        `${apiUrl}/recipes/add`,
+        newRecipe,
+        request
+      );
+      dispatch(hideLoadingActionCreator());
+
+      dispatch(
+        showFeedbackActionCreator({
+          isError: false,
+          showFeedback: true,
+          message: "Recipe added",
+        })
+      );
+
+      return data.recipe;
+    } catch (error) {
+      dispatch(hideLoadingActionCreator());
+
+      dispatch(
+        showFeedbackActionCreator({
+          isError: true,
+          showFeedback: true,
+          message:
+            "Oops! There's been an error adding your recipe. Please try again",
+        })
+      );
+    }
+  };
+
+  return { getRecipes, removeRecipe, addRecipe };
 };
 
 export default useRecipes;

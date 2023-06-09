@@ -1,5 +1,5 @@
 import { screen } from "@testing-library/react";
-import { renderWithProviders } from "../../testUtils/testUtils";
+import { renderWithProviders, wrapWithRouter } from "../../testUtils/testUtils";
 import AddPage from "./AddPage";
 
 describe("Given an AddPage page", () => {
@@ -7,7 +7,7 @@ describe("Given an AddPage page", () => {
     test("Then it should show a heading with the text 'Add recipe'", () => {
       const expectedTitleText = "Add recipe";
 
-      renderWithProviders(<AddPage />);
+      renderWithProviders(wrapWithRouter(<AddPage />));
 
       const heading = screen.getByRole("heading", {
         level: 1,

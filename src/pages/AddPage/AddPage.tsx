@@ -1,4 +1,6 @@
+import { useNavigate } from "react-router-dom";
 import Form from "../../components/Form/Form";
+import useRecipes from "../../hooks/recipes/useRecipes";
 import { useAppDispatch } from "../../store";
 import { addRecipeActionCreator } from "../../store/recipe/recipeSlice";
 import { RecipeStructure } from "../../store/recipe/types";
@@ -6,9 +8,16 @@ import AddPageStyled from "./AddPageStyled";
 
 const AddPage = (): React.ReactElement => {
   const dispatch = useAppDispatch();
+  const { addRecipe } = useRecipes();
+  const navigate = useNavigate();
 
-  const addOnSubmit = (newRecipe: RecipeStructure) => {
-    dispatch(addRecipeActionCreator(newRecipe));
+  const addOnSubmit = async (newRecipe: RecipeStructure) => {
+    const newRecipeData = await addRecipe(newRecipe);
+
+    if (newRecipeData) {
+      dispatch(addRecipeActionCreator(newRecipeData));
+      navigate("/home");
+    }
   };
 
   return (
