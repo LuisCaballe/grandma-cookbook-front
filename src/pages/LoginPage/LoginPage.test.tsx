@@ -24,7 +24,7 @@ describe("Given a LoginPage page", () => {
     expect(image).toBeInTheDocument();
   });
 
-  describe("When the user submit the form with a valid credentials", () => {
+  describe("When the user submits the form with a valid credentials", () => {
     test("Then it should show a heading with the text 'Admin's recipes'", async () => {
       const expectedHeadingText = "Admin's recipes";
       const mockUser: UserDataCredentials = {

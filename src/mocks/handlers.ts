@@ -19,6 +19,10 @@ export const handlers = [
       return res(ctx.status(200));
     }
   ),
+
+  rest.post(`${apiUrl}/recipes/add`, (_req, res, ctx) => {
+    return res(ctx.status(201), ctx.json({ recipe: mockRecipesList[0] }));
+  }),
 ];
 
 export const errorHandlers = [
