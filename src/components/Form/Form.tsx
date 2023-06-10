@@ -5,10 +5,14 @@ import FormStyled from "../shared/FromStyled";
 
 interface FormProps {
   buttonText: string;
+  actionOnSubmit: (newRecipe: RecipeStructure) => void;
 }
 
-const Form = ({ buttonText }: FormProps): React.ReactElement => {
-  const initialReceivedRecipeData: Partial<RecipeStructure> = {
+const Form = ({
+  buttonText,
+  actionOnSubmit,
+}: FormProps): React.ReactElement => {
+  const initialReceivedRecipeData: RecipeStructure = {
     name: "",
     imageUrl: "",
     difficulty: "",
@@ -40,8 +44,14 @@ const Form = ({ buttonText }: FormProps): React.ReactElement => {
     receivedRecipeData.ingredients !== "" &&
     receivedRecipeData.directions !== "";
 
+  const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
+    event.preventDefault();
+    actionOnSubmit(receivedRecipeData);
+    setReceivedRecipeData(initialReceivedRecipeData);
+  };
+
   return (
-    <FormStyled className="form" autoComplete="off">
+    <FormStyled className="form" autoComplete="off" onSubmit={handleSubmit}>
       <div className="form__control">
         <label htmlFor="name" className="form__label">
           Name :
@@ -60,7 +70,7 @@ const Form = ({ buttonText }: FormProps): React.ReactElement => {
         </label>
         <input
           id="imageUrl"
-          type="text"
+          type="url"
           className="form__input"
           onChange={onChangeData}
           value={receivedRecipeData.imageUrl}
