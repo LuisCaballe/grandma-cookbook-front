@@ -44,15 +44,14 @@ describe("Given a Form component", () => {
     });
   });
 
-  labels.slice(0, 4).forEach((label) => {
-    describe(`When it is rendered and the user types a text 'test' on the field text '${label}'`, () => {
-      test("Then it should show the text 'test' in the text field ", async () => {
+  describe(`When it is rendered and the user types a text 'test' on a text field`, () => {
+    labels.slice(0, 4).forEach((label) => {
+      test("Then it should show the text 'test' in the text field", async () => {
         const fieldText = "test";
 
         renderWithProviders(
           <Form buttonText="" actionOnSubmit={actionOnSubmit} />
         );
-
         const labelField = screen.getByLabelText(label);
         await userEvent.type(labelField, fieldText);
 
@@ -103,7 +102,7 @@ describe("Given a Form component", () => {
     });
   });
 
-  describe("When it is rendered and the user fills in all the inputs fields", () => {
+  describe("When it is rendered and the user fills in all the fields of the form", () => {
     test("Then the button should be enabled", async () => {
       renderWithProviders(
         <Form buttonText="Add" actionOnSubmit={actionOnSubmit} />
@@ -130,6 +129,39 @@ describe("Given a Form component", () => {
       await userEvent.type(cookingTimeField, expectedTime.toString());
 
       expect(button).toBeEnabled();
+    });
+  });
+
+  describe("When it is rendered and the user fills in all the fields of the form and clicks on the button", () => {
+    test("Then the handleSubmit function should be called", async () => {
+      renderWithProviders(
+        <Form buttonText="Add" actionOnSubmit={actionOnSubmit} />
+      );
+
+      const expectedTime = 45;
+      const expectedOption = "Easy";
+      const expectedTextExample = "test";
+      const expectedImageUrl = "http://image.com";
+
+      const nameField = screen.getByLabelText(labels[0]);
+      const imageUrlField = screen.getByLabelText(labels[1]);
+      const ingredientsField = screen.getByLabelText(labels[2]);
+      const directionsField = screen.getByLabelText(labels[3]);
+      const cookingTimeField = screen.getByLabelText(labels[4]);
+      const difficultyField = screen.getByLabelText(labels[5]);
+
+      await userEvent.type(nameField, expectedTextExample);
+      await userEvent.type(imageUrlField, expectedImageUrl);
+      await userEvent.type(ingredientsField, expectedTextExample);
+      await userEvent.type(directionsField, expectedTextExample);
+      await userEvent.selectOptions(difficultyField, expectedOption);
+      await userEvent.type(cookingTimeField, expectedTime.toString());
+
+      const button = screen.getByRole("button");
+
+      await userEvent.click(button);
+
+      expect(actionOnSubmit).toHaveBeenCalled();
     });
   });
 });
