@@ -4,6 +4,7 @@ import { loadRecipesActionCreator } from "../../store/recipe/recipeSlice";
 import RecipesPageStyled from "./RecipesPageStyled";
 import RecipesList from "../../components/RecipesList/RecipesList";
 import useRecipes from "../../hooks/recipes/useRecipes";
+import Pagination from "../../components/Pagination/Pagination";
 
 const RecipesPage = (): React.ReactElement => {
   const dispatch = useAppDispatch();
@@ -36,6 +37,7 @@ const RecipesPage = (): React.ReactElement => {
       <h1 className="recipes__title">{`${userName}'s recipes`}</h1>
       <p>Here is your list of recipes, enjoy your meal!</p>
       <RecipesList />
+      <Pagination />
     </RecipesPageStyled>
   );
 };
