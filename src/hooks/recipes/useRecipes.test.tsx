@@ -94,3 +94,26 @@ describe("Given a removeRecipe function", () => {
     });
   });
 });
+
+describe("Given a addRecipe function", () => {
+  describe("When it is invoked and there is an error", () => {
+    test("Then it should show to the user a feedback message with an error", async () => {
+      server.resetHandlers(...errorHandlers);
+      const {
+        result: {
+          current: { addRecipe },
+        },
+      } = renderHook(() => useRecipes(), {
+        wrapper: wrapperWithProvider,
+      });
+
+      renderWithProviders(wrapWithRouter(<Layout />));
+
+      await addRecipe(mockRecipesList[0]);
+
+      const errorIcon = screen.getByAltText("error icon");
+
+      expect(errorIcon).toBeInTheDocument();
+    });
+  });
+});

@@ -40,4 +40,8 @@ export const errorHandlers = [
       return res(ctx.status(404));
     }
   ),
+
+  rest.post(`${apiUrl}/recipes/add`, (_req, res, ctx) => {
+    return res(ctx.status(400));
+  }),
 ];
