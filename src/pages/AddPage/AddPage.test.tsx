@@ -55,7 +55,8 @@ describe("Given an AddPage page", () => {
       const expectedTime = 45;
       const expectedOption = "Easy";
       const expectedTextExample = "test";
-      const expectedImageUrl = "http://image.com";
+      const expectedImageUrl =
+        "https://cdn.discordapp.com/attachments/1114233686947270749/1116128556259487804/gazpacho.webp";
 
       const nameField = screen.getByLabelText(labels[0]);
       const imageUrlField = screen.getByLabelText(labels[1]);

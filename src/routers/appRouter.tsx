@@ -1,8 +1,12 @@
 import { Navigate, RouteObject, createBrowserRouter } from "react-router-dom";
 import App from "../components/App/App";
-import { LazyLoginPage, LazyNotFoundPage, LazyRecipesPage } from "./LazyPages";
+import {
+  LazyAddPage,
+  LazyLoginPage,
+  LazyNotFoundPage,
+  LazyRecipesPage,
+} from "./LazyPages";
 import { Suspense } from "react";
-import AddPage from "../pages/AddPage/AddPage";
 
 const routes: RouteObject[] = [
   {
@@ -28,7 +32,11 @@ const routes: RouteObject[] = [
       },
       {
         path: "/add",
-        element: <AddPage />,
+        element: (
+          <Suspense>
+            <LazyAddPage />
+          </Suspense>
+        ),
       },
       {
         path: "*",

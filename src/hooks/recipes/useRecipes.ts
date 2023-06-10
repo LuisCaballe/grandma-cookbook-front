@@ -8,7 +8,6 @@ import {
   showFeedbackActionCreator,
   showLoadingActionCreator,
 } from "../../store/ui/uiSlice";
-import { removeRecipeActionCreator } from "../../store/recipe/recipeSlice";
 
 const useRecipes = () => {
   const token = useAppSelector((state) => state.user.token);
@@ -62,8 +61,6 @@ const useRecipes = () => {
           showFeedback: true,
         })
       );
-
-      dispatch(removeRecipeActionCreator(recipeId));
     } catch (error) {
       dispatch(hideLoadingActionCreator());
       dispatch(
@@ -80,13 +77,15 @@ const useRecipes = () => {
   const addRecipe = async (
     newRecipe: RecipeStructure
   ): Promise<RecipeStructure | undefined> => {
+    dispatch(showLoadingActionCreator());
+
     try {
-      dispatch(showLoadingActionCreator());
       const { data } = await axios.post<{ recipe: RecipeStructure }>(
         `${apiUrl}/recipes/add`,
         newRecipe,
         request
       );
+
       dispatch(hideLoadingActionCreator());
 
       dispatch(
@@ -99,8 +98,6 @@ const useRecipes = () => {
 
       return data.recipe;
     } catch (error) {
-      dispatch(hideLoadingActionCreator());
-
       dispatch(
         showFeedbackActionCreator({
           isError: true,
