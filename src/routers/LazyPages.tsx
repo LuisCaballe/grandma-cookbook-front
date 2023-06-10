@@ -7,3 +7,4 @@ export const LazyRecipesPage = lazy(
 export const LazyNotFoundPage = lazy(
   () => import("../pages/NotFoundPage/NotFoundPage")
 );
+export const LazyAddPage = lazy(() => import("../pages/AddPage/AddPage"));
