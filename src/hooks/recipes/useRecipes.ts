@@ -1,5 +1,5 @@
 import axios from "axios";
-import { RecipeStructure, RecipesState } from "../../store/recipe/types";
+import { RecipeStateResponse, RecipeStructure } from "../../store/recipe/types";
 import { useAppDispatch, useAppSelector } from "../../store";
 import { apiUrl } from "../user/useUser";
 import { useCallback, useMemo } from "react";
@@ -22,29 +22,38 @@ const useRecipes = () => {
     [token]
   );
 
-  const getRecipes = useCallback(async (): Promise<
-    RecipeStructure[] | undefined
-  > => {
-    try {
-      const {
-        data: { recipes },
-      } = await axios.get<RecipesState>(`${apiUrl}/recipes`, request);
+  const getRecipes = useCallback(
+    async (
+      limit: number,
+      skip: number
+    ): Promise<RecipeStateResponse | undefined> => {
+      dispatch(showLoadingActionCreator());
 
-      dispatch(hideLoadingActionCreator());
+      try {
+        const {
+          data: { recipes, totalRecipes },
+        } = await axios.get<RecipeStateResponse>(
+          `${apiUrl}/recipes?limit=${limit}&skip=${skip}`,
+          request
+        );
 
-      return recipes;
-    } catch (error) {
-      const errorMessage = "Recipes couldn't be load. Please, try again";
-      dispatch(hideLoadingActionCreator());
-      dispatch(
-        showFeedbackActionCreator({
-          showFeedback: true,
-          message: errorMessage,
-          isError: true,
-        })
-      );
-    }
-  }, [dispatch, request]);
+        dispatch(hideLoadingActionCreator());
+
+        return { recipes, totalRecipes };
+      } catch (error) {
+        const errorMessage = "Recipes couldn't be load. Please, try again";
+        dispatch(hideLoadingActionCreator());
+        dispatch(
+          showFeedbackActionCreator({
+            showFeedback: true,
+            message: errorMessage,
+            isError: true,
+          })
+        );
+      }
+    },
+    [dispatch, request]
+  );
 
   const removeRecipe = async (recipeId: string): Promise<void> => {
     dispatch(showLoadingActionCreator());

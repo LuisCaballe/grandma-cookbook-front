@@ -3,7 +3,9 @@ import styled from "styled-components";
 const PaginationStyled = styled.div`
   display: flex;
   justify-content: space-between;
+  align-items: center;
   background-color: ${(props) => props.theme.colors.lightBackground};
+
   .pagination {
     &__button {
       display: flex;
@@ -14,6 +16,10 @@ const PaginationStyled = styled.div`
       flex-direction: column;
       justify-content: center;
       align-items: center;
+
+      :disabled {
+        visibility: hidden;
+      }
 
       &--left {
         border-radius: 10px 0px 0px 10px;
