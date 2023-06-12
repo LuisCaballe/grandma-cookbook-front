@@ -8,6 +8,7 @@ interface ButtonProps {
   height?: string;
   isDisabled?: boolean;
   type?: "submit" | "reset" | "button" | undefined;
+  ariaLabel?: string;
 }
 
 const Button = ({
@@ -20,9 +21,11 @@ const Button = ({
   height,
   isDisabled,
   type,
+  ariaLabel,
 }: ButtonProps): React.ReactElement => {
   return (
     <button
+      aria-label={ariaLabel}
       className={className}
       onClick={actionOnClick}
       disabled={isDisabled}

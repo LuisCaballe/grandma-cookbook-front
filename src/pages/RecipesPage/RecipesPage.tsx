@@ -11,26 +11,25 @@ const RecipesPage = (): React.ReactElement => {
   const userName = useAppSelector((state) => state.user.name);
   const { getRecipes } = useRecipes();
 
-  const limit = 3;
   const [skip, setSkip] = useState(0);
   const [totalRecipes, setTotalRecipes] = useState(0);
   const [page, setPage] = useState(1);
 
   const nextPage = () => {
-    setSkip(skip + limit);
+    setSkip(skip + 5);
     setPage(page + 1);
     window.scrollTo(0, 0);
   };
 
   const previousPage = () => {
-    setSkip(skip - limit);
+    setSkip(skip - 5);
     setPage(page - 1);
     window.scrollTo(0, 0);
   };
 
   useEffect(() => {
     (async () => {
-      const recipesState = await getRecipes(limit, skip);
+      const recipesState = await getRecipes(skip);
 
       if (recipesState) {
         const { recipes, totalRecipes } = recipesState;
@@ -65,7 +64,6 @@ const RecipesPage = (): React.ReactElement => {
         previousPageOnClick={previousPage}
         page={page}
         totalRecipes={totalRecipes}
-        limit={limit}
       />
     </RecipesPageStyled>
   );

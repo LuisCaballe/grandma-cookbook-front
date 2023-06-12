@@ -16,7 +16,6 @@ beforeEach(() => {
 });
 
 describe("Given a getRecipes function", () => {
-  const limit = 3;
   const skip = 3;
   describe("When it is called with a valid token", () => {
     test("Then it should return a list with two recipes", async () => {
@@ -28,7 +27,7 @@ describe("Given a getRecipes function", () => {
         },
       } = renderHook(() => useRecipes(), { wrapper: wrapperWithProvider });
 
-      const recipeState = await getRecipes(limit, skip);
+      const recipeState = await getRecipes(skip);
 
       const recipesList = recipeState?.recipes;
 
@@ -49,7 +48,7 @@ describe("Given a getRecipes function", () => {
 
       renderWithProviders(wrapWithRouter(<Layout />));
 
-      await getRecipes(limit, skip);
+      await getRecipes(skip);
       const icon = screen.getByAltText(expectedAltText);
 
       expect(icon).toBeInTheDocument();

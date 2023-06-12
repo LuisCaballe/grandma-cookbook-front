@@ -6,7 +6,6 @@ interface PaginationProps {
   previousPageOnClick: () => void;
   page: number;
   totalRecipes: number;
-  limit: number;
 }
 
 const Pagination = ({
@@ -14,9 +13,8 @@ const Pagination = ({
   previousPageOnClick,
   page,
   totalRecipes,
-  limit,
 }: PaginationProps): React.ReactElement => {
-  const totalPages = Math.ceil(totalRecipes / limit);
+  const totalPages = Math.ceil(totalRecipes / 5);
 
   const isPreviousDisabled = page === 1;
 
@@ -30,6 +28,9 @@ const Pagination = ({
         altText="left arrow"
         actionOnClick={previousPageOnClick}
         isDisabled={isPreviousDisabled}
+        ariaLabel="previous button"
+        width="21"
+        height="17"
       />
       <span>
         {page} / {totalPages}
@@ -40,6 +41,9 @@ const Pagination = ({
         altText="right arrow"
         actionOnClick={nextPageOnClick}
         isDisabled={isNextDisabled}
+        ariaLabel="next button"
+        width="21"
+        height="17"
       />
     </PaginationStyled>
   );
