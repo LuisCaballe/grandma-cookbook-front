@@ -1,6 +1,7 @@
 import { rest } from "msw";
 import { tokenMock } from "./userMocks";
-import { mockRecipesList, mockThreeRecipes } from "./recipeMocks";
+import { mockRecipesList } from "./recipeMocks";
+import { getRecipesListMock } from "../factories/recipe/recipeFactory";
 
 const apiUrl = import.meta.env.VITE_API_URL;
 
@@ -49,17 +50,19 @@ export const errorHandlers = [
   }),
 ];
 
+const mockTwelveRecipes = getRecipesListMock(12);
+
 export const paginationHandlers = [
   rest.get(`${apiUrl}/recipes`, (req, res, ctx) => {
     const searchParams = req.url.searchParams;
     searchParams.set("skip", "0");
-    searchParams.set("limit", "1");
+    searchParams.set("limit", "5");
 
     return res(
       ctx.status(200),
       ctx.json({
-        recipes: mockThreeRecipes,
-        totalRecipes: mockThreeRecipes.length,
+        recipes: mockTwelveRecipes,
+        totalRecipes: mockTwelveRecipes.length,
       })
     );
   }),
