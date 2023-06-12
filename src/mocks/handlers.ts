@@ -1,6 +1,6 @@
 import { rest } from "msw";
 import { tokenMock } from "./userMocks";
-import { mockRecipesList } from "./recipeMocks";
+import { mockRecipesList, mockThreeRecipes } from "./recipeMocks";
 
 const apiUrl = import.meta.env.VITE_API_URL;
 
@@ -10,7 +10,10 @@ export const handlers = [
   }),
 
   rest.get(`${apiUrl}/recipes`, (_req, res, ctx) => {
-    return res(ctx.status(200), ctx.json({ recipes: mockRecipesList }));
+    return res(
+      ctx.status(200),
+      ctx.json({ recipes: mockRecipesList, totalRecipes: 2 })
+    );
   }),
 
   rest.delete(
@@ -43,5 +46,21 @@ export const errorHandlers = [
 
   rest.post(`${apiUrl}/recipes/add`, (_req, res, ctx) => {
     return res(ctx.status(400));
+  }),
+];
+
+export const paginationHandlers = [
+  rest.get(`${apiUrl}/recipes`, (req, res, ctx) => {
+    const searchParams = req.url.searchParams;
+    searchParams.set("skip", "0");
+    searchParams.set("limit", "1");
+
+    return res(
+      ctx.status(200),
+      ctx.json({
+        recipes: mockThreeRecipes,
+        totalRecipes: mockThreeRecipes.length,
+      })
+    );
   }),
 ];

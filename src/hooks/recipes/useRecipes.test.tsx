@@ -16,6 +16,7 @@ beforeEach(() => {
 });
 
 describe("Given a getRecipes function", () => {
+  const skip = 3;
   describe("When it is called with a valid token", () => {
     test("Then it should return a list with two recipes", async () => {
       server.resetHandlers(...handlers);
@@ -26,7 +27,9 @@ describe("Given a getRecipes function", () => {
         },
       } = renderHook(() => useRecipes(), { wrapper: wrapperWithProvider });
 
-      const recipesList = await getRecipes();
+      const recipeState = await getRecipes(skip);
+
+      const recipesList = recipeState?.recipes;
 
       expect(recipesList).toStrictEqual(mockRecipesList);
     });
@@ -45,7 +48,7 @@ describe("Given a getRecipes function", () => {
 
       renderWithProviders(wrapWithRouter(<Layout />));
 
-      await getRecipes();
+      await getRecipes(skip);
       const icon = screen.getByAltText(expectedAltText);
 
       expect(icon).toBeInTheDocument();
