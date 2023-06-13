@@ -7,6 +7,7 @@ import {
   LazyRecipesPage,
 } from "./LazyPages";
 import { Suspense } from "react";
+import DetailPage from "../pages/DetailPage/DetailPage";
 
 const routes: RouteObject[] = [
   {
@@ -37,6 +38,10 @@ const routes: RouteObject[] = [
             <LazyAddPage />
           </Suspense>
         ),
+      },
+      {
+        path: "/detail",
+        element: <DetailPage />,
       },
       {
         path: "*",
