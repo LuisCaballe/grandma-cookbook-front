@@ -34,6 +34,14 @@ const recipeSlice = createSlice({
       ...currentRecipesState,
       recipes: [...currentRecipesState.recipes, action.payload],
     }),
+
+    loadSelectedRecipe: (
+      currentRecipesState: RecipesState,
+      action: PayloadAction<string>
+    ): RecipesState => ({
+      ...currentRecipesState,
+      selectedRecipeId: action.payload,
+    }),
   },
 });
 
@@ -41,6 +49,7 @@ export const {
   loadRecipes: loadRecipesActionCreator,
   removeRecipe: removeRecipeActionCreator,
   addRecipe: addRecipeActionCreator,
+  loadSelectedRecipe: loadSelectedRecipeActionCreator,
 } = recipeSlice.actions;
 
 export const recipeReducer = recipeSlice.reducer;
