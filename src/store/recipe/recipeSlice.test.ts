@@ -69,12 +69,12 @@ describe("Given a recipeReducer reducer", () => {
       };
       const expectedRecipesState: RecipesState = {
         recipes: mockRecipesList,
-        selectedRecipeId: mockRecipesList[0].id,
+        selectedRecipe: mockRecipesList[0],
       };
 
       const newRecipesState = recipeReducer(
         currentRecipesState,
-        loadSelectedRecipeActionCreator(mockRecipesList[0].id as string)
+        loadSelectedRecipeActionCreator(mockRecipesList[0])
       );
 
       expect(newRecipesState).toStrictEqual(expectedRecipesState);

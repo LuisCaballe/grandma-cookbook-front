@@ -104,6 +104,7 @@ const useRecipes = () => {
 
       return data.recipe;
     } catch (error) {
+      dispatch(hideLoadingActionCreator());
       dispatch(
         showFeedbackActionCreator({
           isError: true,
@@ -115,7 +116,34 @@ const useRecipes = () => {
     }
   };
 
-  return { getRecipes, removeRecipe, addRecipe };
+  const getSelectedRecipe = async (
+    recipeId: string
+  ): Promise<RecipeStructure | undefined> => {
+    dispatch(showLoadingActionCreator());
+
+    try {
+      const { data } = await axios.get<{ recipeById: RecipeStructure }>(
+        `${apiUrl}/recipes/${recipeId}`,
+        request
+      );
+      dispatch(hideLoadingActionCreator());
+
+      return data.recipeById;
+    } catch (error) {
+      dispatch(hideLoadingActionCreator());
+
+      dispatch(
+        showFeedbackActionCreator({
+          isError: true,
+          showFeedback: true,
+          message:
+            "Oops! There's been an error loading the recipe's detail. Please try again",
+        })
+      );
+    }
+  };
+
+  return { getRecipes, removeRecipe, addRecipe, getSelectedRecipe };
 };
 
 export default useRecipes;

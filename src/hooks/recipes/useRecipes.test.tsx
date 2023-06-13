@@ -120,3 +120,45 @@ describe("Given a addRecipe function", () => {
     });
   });
 });
+
+describe("Given a getSelectedRecipe function", () => {
+  describe("When it is invoked with an existing id recipe", () => {
+    test("Then it should return a recipe with the selected id", async () => {
+      server.resetHandlers(...handlers);
+      const expectedRecipe = mockRecipesList[0];
+
+      const {
+        result: {
+          current: { getSelectedRecipe },
+        },
+      } = renderHook(() => useRecipes(), { wrapper: wrapperWithProvider });
+
+      const selectedRecipe = await getSelectedRecipe(
+        mockRecipesList[0].id as string
+      );
+
+      expect(selectedRecipe).toStrictEqual(expectedRecipe);
+    });
+  });
+
+  describe("when it is invoked with an invalid id recipe", () => {
+    test("Then it should show to the user a feedback message with an error", async () => {
+      server.resetHandlers(...errorHandlers);
+
+      const {
+        result: {
+          current: { getSelectedRecipe },
+        },
+      } = renderHook(() => useRecipes(), {
+        wrapper: wrapperWithProvider,
+      });
+
+      renderWithProviders(wrapWithRouter(<Layout />));
+
+      await getSelectedRecipe(mockRecipesList[0].id as string);
+      const errorIcon = screen.getByAltText("error icon");
+
+      expect(errorIcon).toBeInTheDocument();
+    });
+  });
+});

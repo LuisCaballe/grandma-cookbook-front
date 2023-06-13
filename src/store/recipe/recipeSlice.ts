@@ -37,10 +37,10 @@ const recipeSlice = createSlice({
 
     loadSelectedRecipe: (
       currentRecipesState: RecipesState,
-      action: PayloadAction<string>
+      action: PayloadAction<RecipeStructure>
     ): RecipesState => ({
       ...currentRecipesState,
-      selectedRecipeId: action.payload,
+      selectedRecipe: action.payload,
     }),
   },
 });

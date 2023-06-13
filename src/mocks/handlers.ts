@@ -27,6 +27,10 @@ export const handlers = [
   rest.post(`${apiUrl}/recipes/add`, (_req, res, ctx) => {
     return res(ctx.status(201), ctx.json({ recipe: mockRecipesList[0] }));
   }),
+
+  rest.get(`${apiUrl}/recipes/${mockRecipesList[0].id}`, (_req, res, ctx) => {
+    return res(ctx.status(200), ctx.json({ recipeById: mockRecipesList[0] }));
+  }),
 ];
 
 export const errorHandlers = [
@@ -47,6 +51,10 @@ export const errorHandlers = [
 
   rest.post(`${apiUrl}/recipes/add`, (_req, res, ctx) => {
     return res(ctx.status(400));
+  }),
+
+  rest.get(`${apiUrl}/recipes/${mockRecipesList[0].id}`, (_req, res, ctx) => {
+    return res(ctx.status(404));
   }),
 ];
 
