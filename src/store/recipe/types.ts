@@ -11,6 +11,7 @@ export interface RecipeStructure {
 
 export interface RecipesState {
   recipes: RecipeStructure[];
+  selectedRecipeId?: string;
 }
 
 export interface RecipeStateResponse extends RecipesState {
