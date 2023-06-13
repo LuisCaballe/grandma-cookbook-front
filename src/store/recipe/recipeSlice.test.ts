@@ -2,6 +2,7 @@ import { mockRecipesList } from "../../mocks/recipeMocks";
 import {
   addRecipeActionCreator,
   loadRecipesActionCreator,
+  loadSelectedRecipeActionCreator,
   recipeReducer,
   removeRecipeActionCreator,
 } from "./recipeSlice";
@@ -58,6 +59,25 @@ describe("Given a recipeReducer reducer", () => {
       );
 
       expect(newRecipesState).toStrictEqual({ recipes: mockRecipesList });
+    });
+  });
+
+  describe("When it receives a current recipes state and a loadSelectedRecipe action with an id of a recipe", () => {
+    test("Then it should return the list of recipes and the id of the selected recipe", () => {
+      const currentRecipesState: RecipesState = {
+        recipes: mockRecipesList,
+      };
+      const expectedRecipesState: RecipesState = {
+        recipes: mockRecipesList,
+        selectedRecipeId: mockRecipesList[0].id,
+      };
+
+      const newRecipesState = recipeReducer(
+        currentRecipesState,
+        loadSelectedRecipeActionCreator(mockRecipesList[0].id as string)
+      );
+
+      expect(newRecipesState).toStrictEqual(expectedRecipesState);
     });
   });
 });
