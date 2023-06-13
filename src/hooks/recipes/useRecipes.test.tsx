@@ -10,6 +10,7 @@ import { server } from "../../mocks/server";
 import { errorHandlers, handlers } from "../../mocks/handlers";
 import { vi } from "vitest";
 import Layout from "../../components/Layout/Layout";
+import { act } from "react-dom/test-utils";
 
 beforeEach(() => {
   vi.clearAllMocks();
@@ -27,11 +28,13 @@ describe("Given a getRecipes function", () => {
         },
       } = renderHook(() => useRecipes(), { wrapper: wrapperWithProvider });
 
-      const recipeState = await getRecipes(skip);
+      await act(async () => {
+        const recipeState = await getRecipes(skip);
 
-      const recipesList = recipeState?.recipes;
+        const recipesList = recipeState?.recipes;
 
-      expect(recipesList).toStrictEqual(mockRecipesList);
+        expect(recipesList).toStrictEqual(mockRecipesList);
+      });
     });
   });
 
@@ -48,7 +51,9 @@ describe("Given a getRecipes function", () => {
 
       renderWithProviders(wrapWithRouter(<Layout />));
 
-      await getRecipes(skip);
+      await act(async () => {
+        await getRecipes(skip);
+      });
       const icon = screen.getByAltText(expectedAltText);
 
       expect(icon).toBeInTheDocument();
@@ -69,7 +74,9 @@ describe("Given a removeRecipe function", () => {
 
       renderWithProviders(wrapWithRouter(<Layout />));
 
-      await removeRecipe(mockRecipesList[0].id as string);
+      await act(async () => {
+        await removeRecipe(mockRecipesList[0].id as string);
+      });
       const successIcon = screen.getByAltText("success icon");
 
       expect(successIcon).toBeInTheDocument();
@@ -90,7 +97,9 @@ describe("Given a removeRecipe function", () => {
 
       renderWithProviders(wrapWithRouter(<Layout />));
 
-      await removeRecipe(mockRecipesList[0].id as string);
+      await act(async () => {
+        await removeRecipe(mockRecipesList[0].id as string);
+      });
       const errorIcon = screen.getByAltText("error icon");
 
       expect(errorIcon).toBeInTheDocument();
@@ -112,7 +121,9 @@ describe("Given a addRecipe function", () => {
 
       renderWithProviders(wrapWithRouter(<Layout />));
 
-      await addRecipe(mockRecipesList[0]);
+      await act(async () => {
+        await addRecipe(mockRecipesList[0]);
+      });
 
       const errorIcon = screen.getByAltText("error icon");
 
@@ -133,11 +144,13 @@ describe("Given a getSelectedRecipe function", () => {
         },
       } = renderHook(() => useRecipes(), { wrapper: wrapperWithProvider });
 
-      const selectedRecipe = await getSelectedRecipe(
-        mockRecipesList[0].id as string
-      );
+      await act(async () => {
+        const selectedRecipe = await getSelectedRecipe(
+          mockRecipesList[0].id as string
+        );
 
-      expect(selectedRecipe).toStrictEqual(expectedRecipe);
+        expect(selectedRecipe).toStrictEqual(expectedRecipe);
+      });
     });
   });
 
@@ -155,7 +168,9 @@ describe("Given a getSelectedRecipe function", () => {
 
       renderWithProviders(wrapWithRouter(<Layout />));
 
-      await getSelectedRecipe(mockRecipesList[0].id as string);
+      await act(async () => {
+        await getSelectedRecipe(mockRecipesList[0].id as string);
+      });
       const errorIcon = screen.getByAltText("error icon");
 
       expect(errorIcon).toBeInTheDocument();

@@ -1,4 +1,5 @@
 import Button from "../../components/Button/Button";
+import DetailPageStyled from "./DetailPageStyled";
 
 const DetailPage = (): React.ReactElement => {
   const recipe = {
@@ -16,46 +17,46 @@ const DetailPage = (): React.ReactElement => {
   };
 
   return (
-    <main>
-      <section>
-        <h1 className="recipes__title">Recipe details</h1>
-        <article className="recipe-card">
+    <>
+      <DetailPageStyled>
+        <h1 className="detail__heading">Recipe details</h1>
+        <section className="detail">
           <Button
-            className="recipe-card__circle-button"
-            icon="images/delete-btn.svg"
-            altText="Delete button"
+            className="detail__circle-button"
+            icon="images/edit-btn.svg"
+            altText="Edit button"
             width="48"
             height="48"
           />
           <img
-            className="recipe-card__image"
+            className="detail__image"
             src={recipe.imageUrl}
             alt={`${recipe.name} recipe`}
             width="260"
             height="280"
           />
-          <div className="recipe-card__text-container">
-            <h2 className="recipe-card__title">{recipe.name}</h2>
+          <div className="detail__text-container">
+            <h2 className="detail__title">{recipe.name}</h2>
             <div>
-              <span className="recipe-card__text">Difficulty :</span>{" "}
+              <span className="detail__text">Difficulty :</span>{" "}
               {recipe.difficulty}
             </div>
             <div>
-              <span className="recipe-card__text">Cooking time :</span>{" "}
+              <span className="detail__text">Cooking time :</span>{" "}
               {recipe.cookingTime} minutes
             </div>
             <div>
-              <span className="recipe-card__text">Ingredients :</span>{" "}
+              <span className="detail__text">Ingredients :</span>{" "}
               {recipe.ingredients}
             </div>
             <div>
-              <span className="recipe-card__text">Directions :</span>{" "}
+              <span className="detail__text">Directions :</span>{" "}
               {recipe.directions}
             </div>
           </div>
-        </article>
-      </section>
-    </main>
+        </section>
+      </DetailPageStyled>
+    </>
   );
 };
 
