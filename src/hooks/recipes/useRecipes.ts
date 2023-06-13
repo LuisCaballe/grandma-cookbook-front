@@ -116,32 +116,33 @@ const useRecipes = () => {
     }
   };
 
-  const getSelectedRecipe = async (
-    recipeId: string
-  ): Promise<RecipeStructure | undefined> => {
-    dispatch(showLoadingActionCreator());
+  const getSelectedRecipe = useCallback(
+    async (recipeId: string): Promise<RecipeStructure | undefined> => {
+      dispatch(showLoadingActionCreator());
 
-    try {
-      const { data } = await axios.get<{ recipeById: RecipeStructure }>(
-        `${apiUrl}/recipes/${recipeId}`,
-        request
-      );
-      dispatch(hideLoadingActionCreator());
+      try {
+        const { data } = await axios.get<{ recipeById: RecipeStructure }>(
+          `${apiUrl}/recipes/${recipeId}`,
+          request
+        );
+        dispatch(hideLoadingActionCreator());
 
-      return data.recipeById;
-    } catch (error) {
-      dispatch(hideLoadingActionCreator());
+        return data.recipeById;
+      } catch (error) {
+        dispatch(hideLoadingActionCreator());
 
-      dispatch(
-        showFeedbackActionCreator({
-          isError: true,
-          showFeedback: true,
-          message:
-            "Oops! There's been an error loading the recipe's detail. Please try again",
-        })
-      );
-    }
-  };
+        dispatch(
+          showFeedbackActionCreator({
+            isError: true,
+            showFeedback: true,
+            message:
+              "Oops! There's been an error loading the recipe's detail. Please try again",
+          })
+        );
+      }
+    },
+    [dispatch, request]
+  );
 
   return { getRecipes, removeRecipe, addRecipe, getSelectedRecipe };
 };

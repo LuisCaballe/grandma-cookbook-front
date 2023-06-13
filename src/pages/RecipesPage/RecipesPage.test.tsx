@@ -1,5 +1,5 @@
-import { screen, waitFor } from "@testing-library/react";
-import { renderWithProviders } from "../../testUtils/testUtils";
+import { act, screen, waitFor } from "@testing-library/react";
+import { renderWithProviders, wrapWithRouter } from "../../testUtils/testUtils";
 import RecipesPage from "./RecipesPage";
 import { getUserMock } from "../../factories/user/userFactory";
 import { server } from "../../mocks/server";
@@ -7,16 +7,16 @@ import { paginationHandlers } from "../../mocks/handlers";
 import userEvent from "@testing-library/user-event";
 import { vi } from "vitest";
 
-describe("Given a RecipesPage page", () => {
-  window.scrollTo = vi.fn().mockImplementation(() => ({}));
+window.scrollTo = vi.fn().mockImplementation(() => ({}));
 
+describe("Given a RecipesPage page", () => {
   describe("When it is rendered", () => {
     test("Then it should show a heading with the text 'John's recipes'", () => {
       const expectedTitleText = "John's recipes";
 
       const userMock = getUserMock({ name: "John" });
 
-      renderWithProviders(<RecipesPage />, {
+      renderWithProviders(wrapWithRouter(<RecipesPage />), {
         user: userMock,
       });
 
@@ -33,13 +33,14 @@ describe("Given a RecipesPage page", () => {
     test("Then the next button should be enabled", async () => {
       server.resetHandlers(...paginationHandlers);
 
-      renderWithProviders(<RecipesPage />);
-
+      renderWithProviders(wrapWithRouter(<RecipesPage />));
       const nextButton = screen.getByLabelText("next button");
-      await userEvent.click(nextButton);
+      await act(async () => {
+        await userEvent.click(nextButton);
 
-      waitFor(() => {
-        expect(nextButton).toBeEnabled();
+        waitFor(() => {
+          expect(nextButton).toBeEnabled();
+        });
       });
     });
   });
@@ -48,7 +49,7 @@ describe("Given a RecipesPage page", () => {
     test("Then the previous button should be enabled", async () => {
       server.resetHandlers(...paginationHandlers);
 
-      renderWithProviders(<RecipesPage />);
+      renderWithProviders(wrapWithRouter(<RecipesPage />));
       const nextButton = screen.getByLabelText("next button");
       await userEvent.click(nextButton);
 

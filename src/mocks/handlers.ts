@@ -28,7 +28,7 @@ export const handlers = [
     return res(ctx.status(201), ctx.json({ recipe: mockRecipesList[0] }));
   }),
 
-  rest.get(`${apiUrl}/recipes/${mockRecipesList[0].id}`, (_req, res, ctx) => {
+  rest.get(`${apiUrl}/recipes/:recipeId`, (_req, res, ctx) => {
     return res(ctx.status(200), ctx.json({ recipeById: mockRecipesList[0] }));
   }),
 ];
