@@ -49,7 +49,6 @@ describe("Given a RecipesPage page", () => {
       server.resetHandlers(...paginationHandlers);
 
       renderWithProviders(<RecipesPage />);
-
       const nextButton = screen.getByLabelText("next button");
       await userEvent.click(nextButton);
 
