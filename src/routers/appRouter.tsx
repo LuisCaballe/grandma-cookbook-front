@@ -2,12 +2,12 @@ import { Navigate, RouteObject, createBrowserRouter } from "react-router-dom";
 import App from "../components/App/App";
 import {
   LazyAddPage,
+  LazyDetailPage,
   LazyLoginPage,
   LazyNotFoundPage,
   LazyRecipesPage,
 } from "./LazyPages";
 import { Suspense } from "react";
-import DetailPage from "../pages/DetailPage/DetailPage";
 
 const routes: RouteObject[] = [
   {
@@ -40,8 +40,12 @@ const routes: RouteObject[] = [
         ),
       },
       {
-        path: "/detail",
-        element: <DetailPage />,
+        path: "/:recipeId",
+        element: (
+          <Suspense>
+            <LazyDetailPage />
+          </Suspense>
+        ),
       },
       {
         path: "*",

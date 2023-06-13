@@ -3,7 +3,7 @@ import {
   getRecipeMock,
   getRecipesListMock,
 } from "../../factories/recipe/recipeFactory";
-import { renderWithProviders } from "../../testUtils/testUtils";
+import { renderWithProviders, wrapWithRouter } from "../../testUtils/testUtils";
 import RecipesList from "./RecipesList";
 import userEvent from "@testing-library/user-event";
 import { mockRecipesList } from "../../mocks/recipeMocks";
@@ -13,7 +13,7 @@ describe("Given a RecipesList component", () => {
     test("Then it should show a heading with the first recipe's name", () => {
       const recipesList = getRecipesListMock(3);
 
-      renderWithProviders(<RecipesList />, {
+      renderWithProviders(wrapWithRouter(<RecipesList />), {
         recipe: { recipes: recipesList },
       });
 
@@ -29,7 +29,7 @@ describe("Given a RecipesList component", () => {
     test("Then it should show a heading with the name 'Tortilla de patatas", () => {
       const mockRecipeName = "Tortilla de patatas";
       const mockRecipe = getRecipeMock({ name: mockRecipeName });
-      renderWithProviders(<RecipesList />, {
+      renderWithProviders(wrapWithRouter(<RecipesList />), {
         recipe: { recipes: [mockRecipe] },
       });
 
@@ -43,7 +43,7 @@ describe("Given a RecipesList component", () => {
 
   describe("When it is rendered with a list of recipes and the user clicks on the delete button of one recipe", () => {
     test("Then it should remove the clicked recipe from the list", async () => {
-      renderWithProviders(<RecipesList />, {
+      renderWithProviders(wrapWithRouter(<RecipesList />), {
         recipe: { recipes: mockRecipesList },
       });
 
