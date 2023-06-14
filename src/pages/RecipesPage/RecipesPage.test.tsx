@@ -1,4 +1,4 @@
-import { act, screen, waitFor } from "@testing-library/react";
+import { act, screen } from "@testing-library/react";
 import { renderWithProviders, wrapWithRouter } from "../../testUtils/testUtils";
 import RecipesPage from "./RecipesPage";
 import { getUserMock } from "../../factories/user/userFactory";
@@ -6,6 +6,7 @@ import { server } from "../../mocks/server";
 import { paginationHandlers } from "../../mocks/handlers";
 import userEvent from "@testing-library/user-event";
 import { vi } from "vitest";
+import { mockRecipesList } from "../../mocks/recipeMocks";
 
 window.scrollTo = vi.fn().mockImplementation(() => ({}));
 
@@ -30,34 +31,21 @@ describe("Given a RecipesPage page", () => {
   });
 
   describe("When it is rendered and the user clicks on the next button", () => {
-    test("Then the next button should be enabled", async () => {
+    test("Then the next button should be enabled, on the other hand, the previous button should be disabled", async () => {
       server.resetHandlers(...paginationHandlers);
 
-      renderWithProviders(wrapWithRouter(<RecipesPage />));
-      const nextButton = screen.getByLabelText("next button");
-      await act(async () => {
-        await userEvent.click(nextButton);
-
-        waitFor(() => {
-          expect(nextButton).toBeEnabled();
-        });
+      renderWithProviders(wrapWithRouter(<RecipesPage />), {
+        recipe: { recipes: mockRecipesList },
       });
-    });
-  });
-
-  describe("When it is rendered and the user clicks on the next button and after that on the previous button", () => {
-    test("Then the previous button should be enabled", async () => {
-      server.resetHandlers(...paginationHandlers);
-
-      renderWithProviders(wrapWithRouter(<RecipesPage />));
       const nextButton = screen.getByLabelText("next button");
-      await userEvent.click(nextButton);
-
       const previousButton = screen.getByLabelText("previous button");
+
+      await userEvent.click(nextButton);
       await userEvent.click(previousButton);
 
-      waitFor(() => {
-        expect(previousButton).toBeEnabled();
+      await act(async () => {
+        expect(nextButton).toBeEnabled();
+        expect(previousButton).toBeDisabled();
       });
     });
   });
