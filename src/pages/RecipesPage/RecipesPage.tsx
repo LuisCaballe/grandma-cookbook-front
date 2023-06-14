@@ -9,6 +9,7 @@ import Pagination from "../../components/Pagination/Pagination";
 const RecipesPage = (): React.ReactElement => {
   const dispatch = useAppDispatch();
   const userName = useAppSelector((state) => state.user.name);
+  const currentRecipes = useAppSelector((state) => state.recipe.recipes);
   const { getRecipes } = useRecipes();
 
   const [skip, setSkip] = useState(0);
@@ -57,14 +58,33 @@ const RecipesPage = (): React.ReactElement => {
   return (
     <RecipesPageStyled className="recipes">
       <h1 className="recipes__title">{`${userName}'s recipes`}</h1>
-      <p>Here is your list of recipes, enjoy your meal!</p>
+
+      {currentRecipes.length !== 0 ? (
+        <p>Here is your list of recipes, enjoy your meal!</p>
+      ) : (
+        <>
+          <p>
+            Unfortunately, there are no recipes in your collection, try to add
+            some and enjoy your meal!
+          </p>
+          <img
+            src="images/draw.webp"
+            alt="Illustration of cooking ingredients"
+            width="260"
+            height="135"
+            className="recipes__image"
+          />
+        </>
+      )}
       <RecipesList />
-      <Pagination
-        nextPageOnClick={nextPage}
-        previousPageOnClick={previousPage}
-        page={page}
-        totalRecipes={totalRecipes}
-      />
+      {currentRecipes.length !== 0 && (
+        <Pagination
+          nextPageOnClick={nextPage}
+          previousPageOnClick={previousPage}
+          page={page}
+          totalRecipes={totalRecipes}
+        />
+      )}
     </RecipesPageStyled>
   );
 };

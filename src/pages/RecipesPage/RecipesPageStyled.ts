@@ -13,6 +13,10 @@ const RecipesPageStyled = styled.section`
       background-color: ${(props) => props.theme.colors.lightBackground};
       padding: 10px 30px;
     }
+
+    &__image {
+      margin: 0 auto;
+    }
   }
 `;
 
