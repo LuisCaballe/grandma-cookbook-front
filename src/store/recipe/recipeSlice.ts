@@ -3,6 +3,7 @@ import { RecipesState, RecipeStructure } from "./types";
 
 const initialRecipesState: RecipesState = {
   recipes: [],
+  totalRecipes: 0,
 };
 
 const recipeSlice = createSlice({
@@ -11,10 +12,14 @@ const recipeSlice = createSlice({
   reducers: {
     loadRecipes: (
       currentRecipesState: RecipesState,
-      action: PayloadAction<RecipeStructure[]>
+      action: PayloadAction<{
+        recipes: RecipeStructure[];
+        totalRecipes: number;
+      }>
     ): RecipesState => ({
       ...currentRecipesState,
-      recipes: action.payload,
+      recipes: action.payload.recipes,
+      totalRecipes: action.payload.totalRecipes,
     }),
 
     removeRecipe: (
