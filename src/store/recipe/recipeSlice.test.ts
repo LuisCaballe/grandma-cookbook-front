@@ -13,13 +13,15 @@ describe("Given a recipeReducer reducer", () => {
     test("Then it should return a list with two recipes", () => {
       const currentRecipesState: RecipesState = {
         recipes: [],
+        totalRecipes: 0,
       };
       const newRecipes: RecipeStructure[] = mockRecipesList;
       const expectedRecipesState: RecipesState = {
         recipes: newRecipes,
+        totalRecipes: newRecipes.length,
       };
 
-      const loadRecipesAction = loadRecipesActionCreator(newRecipes);
+      const loadRecipesAction = loadRecipesActionCreator(expectedRecipesState);
       const newRecipesState = recipeReducer(
         currentRecipesState,
         loadRecipesAction
@@ -33,9 +35,11 @@ describe("Given a recipeReducer reducer", () => {
     test("Then it should return the list of recipes without the recipe with received id", () => {
       const currentRecipesState: RecipesState = {
         recipes: mockRecipesList,
+        totalRecipes: mockRecipesList.length,
       };
       const expectedRecipesState: RecipesState = {
-        recipes: mockRecipesList.slice(1),
+        recipes: [mockRecipesList[1]],
+        totalRecipes: mockRecipesList.length,
       };
 
       const newRecipesState = recipeReducer(
@@ -51,6 +55,11 @@ describe("Given a recipeReducer reducer", () => {
     test("Then it should return the list of recipes with the new recipe", () => {
       const currentRecipesState: RecipesState = {
         recipes: [mockRecipesList[0]],
+        totalRecipes: [mockRecipesList[0]].length,
+      };
+      const expectedRecipesState: RecipesState = {
+        recipes: mockRecipesList,
+        totalRecipes: [mockRecipesList[0]].length,
       };
 
       const newRecipesState = recipeReducer(
@@ -58,7 +67,7 @@ describe("Given a recipeReducer reducer", () => {
         addRecipeActionCreator(mockRecipesList[1])
       );
 
-      expect(newRecipesState).toStrictEqual({ recipes: mockRecipesList });
+      expect(newRecipesState).toStrictEqual(expectedRecipesState);
     });
   });
 
@@ -66,9 +75,11 @@ describe("Given a recipeReducer reducer", () => {
     test("Then it should return the list of recipes and the id of the selected recipe", () => {
       const currentRecipesState: RecipesState = {
         recipes: mockRecipesList,
+        totalRecipes: mockRecipesList.length,
       };
       const expectedRecipesState: RecipesState = {
         recipes: mockRecipesList,
+        totalRecipes: mockRecipesList.length,
         selectedRecipe: mockRecipesList[0],
       };
 

@@ -26,6 +26,10 @@ describe("Given a Feedback component", () => {
             message: "Wrong credentials",
             showFeedback: true,
           },
+          paginationData: {
+            page: 1,
+            skip: 0,
+          },
         },
       });
 

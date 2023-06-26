@@ -17,6 +17,10 @@ describe("Given a showLoading reducer", () => {
           isError: false,
           message: "",
         },
+        paginationData: {
+          page: 1,
+          skip: 0,
+        },
       };
       const expectedUiState: UiStructure = {
         isLoading: true,
@@ -24,6 +28,10 @@ describe("Given a showLoading reducer", () => {
           showFeedback: false,
           isError: false,
           message: "",
+        },
+        paginationData: {
+          page: 1,
+          skip: 0,
         },
       };
 
@@ -44,6 +52,10 @@ describe("Given a hideLoading reducer", () => {
           isError: false,
           message: "",
         },
+        paginationData: {
+          page: 1,
+          skip: 0,
+        },
       };
       const expectedUiState: UiStructure = {
         isLoading: false,
@@ -51,6 +63,10 @@ describe("Given a hideLoading reducer", () => {
           showFeedback: false,
           isError: false,
           message: "",
+        },
+        paginationData: {
+          page: 1,
+          skip: 0,
         },
       };
 
@@ -71,6 +87,10 @@ describe("Given a showFeedback reducer", () => {
           isError: false,
           message: "",
         },
+        paginationData: {
+          page: 1,
+          skip: 0,
+        },
       };
       const expectedUiState: UiStructure = {
         isLoading: false,
@@ -78,6 +98,10 @@ describe("Given a showFeedback reducer", () => {
           showFeedback: true,
           isError: true,
           message: "Wrong credentials",
+        },
+        paginationData: {
+          page: 1,
+          skip: 0,
         },
       };
       const feedbackPayload: FeedbackDataStructure = {
@@ -106,6 +130,10 @@ describe("Given a hideFeedback reducer", () => {
           isError: true,
           message: "Wrong credentials",
         },
+        paginationData: {
+          page: 1,
+          skip: 0,
+        },
       };
       const expectedUiState: UiStructure = {
         isLoading: false,
@@ -113,6 +141,10 @@ describe("Given a hideFeedback reducer", () => {
           showFeedback: false,
           isError: false,
           message: "",
+        },
+        paginationData: {
+          page: 1,
+          skip: 0,
         },
       };
 
