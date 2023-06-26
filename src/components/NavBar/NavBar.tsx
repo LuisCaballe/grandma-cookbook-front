@@ -4,6 +4,7 @@ import { useAppDispatch, useAppSelector } from "../../store";
 import { logoutUserActionCreator } from "../../store/user/userSlice";
 import useLocalStorage from "../../hooks/localStorage/useLocalStorage";
 import Button from "../Button/Button";
+import { resetRecipesActionCreator } from "../../store/recipe/recipeSlice";
 
 const NavBar = (): React.ReactElement => {
   const dispatch = useAppDispatch();
@@ -13,6 +14,7 @@ const NavBar = (): React.ReactElement => {
   const logoutOnClick = () => {
     dispatch(logoutUserActionCreator());
     removeToken("token");
+    dispatch(resetRecipesActionCreator());
     navigate("/login");
   };
 

@@ -18,7 +18,7 @@ const NavBarStyled = styled.nav`
 
       &.active {
         color: ${(props) => props.theme.colors.dark};
-        text-decoration: underline;
+        font-weight: 700;
       }
     }
   }

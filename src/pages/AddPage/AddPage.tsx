@@ -5,6 +5,7 @@ import { useAppDispatch } from "../../store";
 import { addRecipeActionCreator } from "../../store/recipe/recipeSlice";
 import { RecipeStructure } from "../../store/recipe/types";
 import AddPageStyled from "./AddPageStyled";
+import { paginationActionCreator } from "../../store/ui/uiSlice";
 
 const AddPage = (): React.ReactElement => {
   const dispatch = useAppDispatch();
@@ -16,6 +17,10 @@ const AddPage = (): React.ReactElement => {
 
     if (newRecipeData) {
       dispatch(addRecipeActionCreator(newRecipeData));
+      const page = 1;
+      const skip = 0;
+      dispatch(paginationActionCreator({ page, skip }));
+      window.scrollTo(0, 0);
       navigate("/home");
     }
   };

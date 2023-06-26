@@ -58,7 +58,7 @@ export const errorHandlers = [
   }),
 ];
 
-const mockTwelveRecipes = getRecipesListMock(12);
+export const mockTwelveRecipes = getRecipesListMock(12);
 
 export const paginationHandlers = [
   rest.get(`${apiUrl}/recipes`, (req, res, ctx) => {
