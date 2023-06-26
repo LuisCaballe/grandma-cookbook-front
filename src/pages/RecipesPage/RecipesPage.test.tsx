@@ -35,7 +35,10 @@ describe("Given a RecipesPage page", () => {
       server.resetHandlers(...paginationHandlers);
 
       renderWithProviders(wrapWithRouter(<RecipesPage />), {
-        recipe: { recipes: mockRecipesList },
+        recipe: {
+          recipes: mockRecipesList,
+          totalRecipes: mockRecipesList.length,
+        },
       });
       const nextButton = screen.getByLabelText("next button");
       const previousButton = screen.getByLabelText("previous button");

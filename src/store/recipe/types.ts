@@ -11,6 +11,7 @@ export interface RecipeStructure {
 
 export interface RecipesState {
   recipes: RecipeStructure[];
+  totalRecipes: number;
   selectedRecipe?: RecipeStructure;
 }
 

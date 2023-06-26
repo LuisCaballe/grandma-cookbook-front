@@ -26,6 +26,10 @@ describe("Given a Layout component", () => {
             message: "",
             showFeedback: false,
           },
+          paginationData: {
+            page: 1,
+            skip: 0,
+          },
         },
       });
       const loader = screen.getByLabelText(expectedLabelText);
@@ -45,6 +49,10 @@ describe("Given a Layout component", () => {
             isError: true,
             message: "Wrong credentials",
             showFeedback: true,
+          },
+          paginationData: {
+            page: 1,
+            skip: 0,
           },
         },
       });

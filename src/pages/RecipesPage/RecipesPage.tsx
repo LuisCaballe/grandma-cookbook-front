@@ -1,30 +1,30 @@
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 import { useAppDispatch, useAppSelector } from "../../store";
 import { loadRecipesActionCreator } from "../../store/recipe/recipeSlice";
 import RecipesPageStyled from "./RecipesPageStyled";
 import RecipesList from "../../components/RecipesList/RecipesList";
 import useRecipes from "../../hooks/recipes/useRecipes";
 import Pagination from "../../components/Pagination/Pagination";
+import { paginationActionCreator } from "../../store/ui/uiSlice";
 
 const RecipesPage = (): React.ReactElement => {
   const dispatch = useAppDispatch();
   const userName = useAppSelector((state) => state.user.name);
   const currentRecipes = useAppSelector((state) => state.recipe.recipes);
+  let { page, skip } = useAppSelector((state) => state.ui.paginationData);
   const { getRecipes } = useRecipes();
 
-  const [skip, setSkip] = useState(0);
-  const [totalRecipes, setTotalRecipes] = useState(0);
-  const [page, setPage] = useState(1);
-
   const nextPage = () => {
-    setSkip(skip + 5);
-    setPage(page + 1);
+    page = page + 1;
+    skip = skip + 5;
+    dispatch(paginationActionCreator({ page, skip }));
     window.scrollTo(0, 0);
   };
 
   const previousPage = () => {
-    setSkip(skip - 5);
-    setPage(page - 1);
+    page = page - 1;
+    skip = skip - 5;
+    dispatch(paginationActionCreator({ page, skip }));
     window.scrollTo(0, 0);
   };
 
@@ -35,9 +35,7 @@ const RecipesPage = (): React.ReactElement => {
       if (recipesState) {
         const { recipes, totalRecipes } = recipesState;
 
-        dispatch(loadRecipesActionCreator(recipes));
-
-        setTotalRecipes(totalRecipes);
+        dispatch(loadRecipesActionCreator({ recipes, totalRecipes }));
 
         if (recipes.length > 0) {
           const firstImageUrl = recipes[0].imageUrl;
@@ -81,8 +79,6 @@ const RecipesPage = (): React.ReactElement => {
         <Pagination
           nextPageOnClick={nextPage}
           previousPageOnClick={previousPage}
-          page={page}
-          totalRecipes={totalRecipes}
         />
       )}
     </RecipesPageStyled>

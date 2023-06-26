@@ -1,5 +1,9 @@
 import { PayloadAction, createSlice } from "@reduxjs/toolkit";
-import { FeedbackDataStructure, UiStructure } from "./types";
+import {
+  FeedbackDataStructure,
+  PaginationDataStructure,
+  UiStructure,
+} from "./types";
 
 const initialUiState: UiStructure = {
   isLoading: false,
@@ -7,6 +11,10 @@ const initialUiState: UiStructure = {
     showFeedback: false,
     isError: false,
     message: "",
+  },
+  paginationData: {
+    page: 1,
+    skip: 0,
   },
 };
 
@@ -44,6 +52,17 @@ const uiSlice = createSlice({
         message: "",
       },
     }),
+
+    pagination: (
+      currentState: UiStructure,
+      action: PayloadAction<PaginationDataStructure>
+    ): UiStructure => ({
+      ...currentState,
+      paginationData: {
+        page: action.payload.page,
+        skip: action.payload.skip,
+      },
+    }),
   },
 });
 
@@ -52,6 +71,7 @@ export const {
   hideLoading: hideLoadingActionCreator,
   showFeedback: showFeedbackActionCreator,
   hideFeedback: hideFeedbackActionCreator,
+  pagination: paginationActionCreator,
 } = uiSlice.actions;
 
 export const uiReducer = uiSlice.reducer;

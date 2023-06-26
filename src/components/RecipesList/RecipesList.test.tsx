@@ -14,7 +14,7 @@ describe("Given a RecipesList component", () => {
       const recipesList = getRecipesListMock(3);
 
       renderWithProviders(wrapWithRouter(<RecipesList />), {
-        recipe: { recipes: recipesList },
+        recipe: { recipes: recipesList, totalRecipes: recipesList.length },
       });
 
       const heading = screen.getByRole("heading", {
@@ -30,7 +30,7 @@ describe("Given a RecipesList component", () => {
       const mockRecipeName = "Tortilla de patatas";
       const mockRecipe = getRecipeMock({ name: mockRecipeName });
       renderWithProviders(wrapWithRouter(<RecipesList />), {
-        recipe: { recipes: [mockRecipe] },
+        recipe: { recipes: [mockRecipe], totalRecipes: [mockRecipe].length },
       });
 
       const heading = screen.getByRole("heading", {
@@ -44,7 +44,10 @@ describe("Given a RecipesList component", () => {
   describe("When it is rendered with a list of recipes and the user clicks on the delete button of one recipe", () => {
     test("Then it should remove the clicked recipe from the list", async () => {
       renderWithProviders(wrapWithRouter(<RecipesList />), {
-        recipe: { recipes: mockRecipesList },
+        recipe: {
+          recipes: mockRecipesList,
+          totalRecipes: mockRecipesList.length,
+        },
       });
 
       const recipeHeading = screen.getByRole("heading", {

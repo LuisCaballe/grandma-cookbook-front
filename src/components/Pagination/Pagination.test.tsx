@@ -10,8 +10,6 @@ describe("Given a Pagination component", () => {
       const expectedAltText = "right arrow";
       renderWithProviders(
         <Pagination
-          page={2}
-          totalRecipes={20}
           nextPageOnClick={mockPageOnClick}
           previousPageOnClick={mockPageOnClick}
         />

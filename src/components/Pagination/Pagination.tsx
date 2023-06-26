@@ -1,24 +1,24 @@
+import { useAppSelector } from "../../store";
 import Button from "../Button/Button";
 import PaginationStyled from "./PaginationStyled";
 
 interface PaginationProps {
   nextPageOnClick: () => void;
   previousPageOnClick: () => void;
-  page: number;
-  totalRecipes: number;
 }
 
 const Pagination = ({
   nextPageOnClick,
   previousPageOnClick,
-  page,
-  totalRecipes,
 }: PaginationProps): React.ReactElement => {
+  const totalRecipes = useAppSelector((state) => state.recipe.totalRecipes);
+  const page = useAppSelector((state) => state.ui.paginationData.page);
+
   const totalPages = Math.ceil(totalRecipes / 5);
 
   const isPreviousDisabled = page === 1;
 
-  const isNextDisabled = page === totalPages;
+  const isNextDisabled = page === totalPages || totalPages <= 1;
 
   return (
     <PaginationStyled className="pagination">
