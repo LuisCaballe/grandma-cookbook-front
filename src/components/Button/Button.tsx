@@ -7,7 +7,7 @@ interface ButtonProps {
   width?: string;
   height?: string;
   isDisabled?: boolean;
-  type?: "submit" | "reset" | "button" | undefined;
+  type?: "submit" | "reset" | "button";
   ariaLabel?: string;
 }
 
