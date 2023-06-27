@@ -1,4 +1,4 @@
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import Button from "../../components/Button/Button";
 import DetailPageStyled from "./DetailPageStyled";
 import useRecipes from "../../hooks/recipes/useRecipes";
@@ -13,6 +13,7 @@ const DetailPage = (): React.ReactElement => {
   const dispatch = useAppDispatch();
   const recipe = useAppSelector((state) => state.recipe.selectedRecipe);
   const isLogged = useAppSelector((state) => state.user.isLogged);
+  const navigate = useNavigate();
   window.scrollTo(0, 0);
 
   useEffect(() => {
@@ -39,6 +40,10 @@ const DetailPage = (): React.ReactElement => {
     })();
   }, [dispatch, getSelectedRecipe, isLogged, recipeId]);
 
+  const updateOnClick = (): void => {
+    navigate(`/update/${recipe?.id}`);
+  };
+
   return (
     <>
       <DetailPageStyled>
@@ -50,6 +55,7 @@ const DetailPage = (): React.ReactElement => {
             altText="Edit button"
             width="48"
             height="48"
+            actionOnClick={() => updateOnClick()}
           />
           <img
             className="detail__image"

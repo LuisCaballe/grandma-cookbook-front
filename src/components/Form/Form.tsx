@@ -2,6 +2,7 @@ import { useState } from "react";
 import { RecipeStructure } from "../../store/recipe/types";
 import Button from "../Button/Button";
 import FormStyled from "../shared/FromStyled";
+import { useAppSelector } from "../../store";
 
 interface FormProps {
   buttonText: string;
@@ -12,7 +13,9 @@ const Form = ({
   buttonText,
   actionOnSubmit,
 }: FormProps): React.ReactElement => {
-  const initialReceivedRecipeData: RecipeStructure = {
+  const { selectedRecipe } = useAppSelector((state) => state.recipe);
+
+  let initialReceivedRecipeData: RecipeStructure = {
     name: "",
     imageUrl: "",
     difficulty: "",
@@ -20,6 +23,16 @@ const Form = ({
     ingredients: "",
     directions: "",
   };
+  if (selectedRecipe) {
+    initialReceivedRecipeData = {
+      name: selectedRecipe.name,
+      imageUrl: selectedRecipe.imageUrl,
+      difficulty: selectedRecipe.difficulty,
+      cookingTime: selectedRecipe.cookingTime,
+      ingredients: selectedRecipe.ingredients,
+      directions: selectedRecipe.directions,
+    };
+  }
 
   const [receivedRecipeData, setReceivedRecipeData] = useState(
     initialReceivedRecipeData
