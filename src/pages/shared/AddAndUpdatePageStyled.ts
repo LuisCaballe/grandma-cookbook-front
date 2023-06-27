@@ -1,6 +1,6 @@
 import styled from "styled-components";
 
-const AddPageStyled = styled.main`
+const AddAndUpdatePageStyled = styled.main`
   .add {
     display: flex;
     flex-direction: column;
@@ -16,4 +16,4 @@ const AddPageStyled = styled.main`
   }
 `;
 
-export default AddPageStyled;
+export default AddAndUpdatePageStyled;

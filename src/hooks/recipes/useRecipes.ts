@@ -144,7 +144,44 @@ const useRecipes = () => {
     [dispatch, request]
   );
 
-  return { getRecipes, removeRecipe, addRecipe, getSelectedRecipe };
+  const updateRecipe = async (
+    recipeId: string,
+    updatedRecipeData: RecipeStructure
+  ) => {
+    dispatch(showLoadingActionCreator());
+    try {
+      await axios.put(
+        `${apiUrl}/recipes/update/${recipeId}`,
+        updatedRecipeData,
+        request
+      );
+      dispatch(hideLoadingActionCreator());
+      dispatch(
+        showFeedbackActionCreator({
+          isError: false,
+          message: "Recipe updated",
+          showFeedback: true,
+        })
+      );
+    } catch (error) {
+      dispatch(hideLoadingActionCreator());
+      dispatch(
+        showFeedbackActionCreator({
+          isError: true,
+          showFeedback: true,
+          message:
+            "Oops! There's been an error updating your recipe. Please try again",
+        })
+      );
+    }
+  };
+  return {
+    getRecipes,
+    removeRecipe,
+    addRecipe,
+    getSelectedRecipe,
+    updateRecipe,
+  };
 };
 
 export default useRecipes;

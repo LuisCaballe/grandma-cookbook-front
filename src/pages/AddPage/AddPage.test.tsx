@@ -8,6 +8,9 @@ import {
   RouterProvider,
   createMemoryRouter,
 } from "react-router-dom";
+import { vi } from "vitest";
+
+window.scrollTo = vi.fn().mockImplementation(() => ({}));
 
 describe("Given an AddPage page", () => {
   describe("When it is rendered", () => {

@@ -9,7 +9,7 @@ const Header = (): React.ReactElement => {
     <>
       <HeaderStyled>
         <img
-          src="images/logo.svg"
+          src="/images/logo.svg"
           alt="Grandma's Cookbook's logo"
           width="200"
           height="63"

@@ -4,7 +4,7 @@ import useRecipes from "../../hooks/recipes/useRecipes";
 import { useAppDispatch } from "../../store";
 import { addRecipeActionCreator } from "../../store/recipe/recipeSlice";
 import { RecipeStructure } from "../../store/recipe/types";
-import AddPageStyled from "./AddPageStyled";
+import AddAndUpdatePageStyled from "../shared/AddAndUpdatePageStyled";
 import { paginationActionCreator } from "../../store/ui/uiSlice";
 
 const AddPage = (): React.ReactElement => {
@@ -26,7 +26,7 @@ const AddPage = (): React.ReactElement => {
   };
 
   return (
-    <AddPageStyled>
+    <AddAndUpdatePageStyled>
       <section className="add">
         <h1 className="add__title">Add recipe</h1>
         <p>
@@ -35,7 +35,7 @@ const AddPage = (): React.ReactElement => {
         </p>
         <Form buttonText="Add" actionOnSubmit={addOnSubmit} />
       </section>
-    </AddPageStyled>
+    </AddAndUpdatePageStyled>
   );
 };
 

@@ -3,6 +3,7 @@ import userEvent from "@testing-library/user-event";
 import { renderWithProviders } from "../../testUtils/testUtils";
 import Form from "./Form";
 import { vi } from "vitest";
+import { mockRecipesList } from "../../mocks/recipeMocks";
 
 const labels = [
   "Name :",
@@ -163,6 +164,24 @@ describe("Given a Form component", () => {
       await userEvent.click(button);
 
       expect(actionOnSubmit).toHaveBeenCalled();
+    });
+  });
+
+  describe("When it is rendered and there is an existing selected recipe ready to be updated", () => {
+    test("Then all the fields of the form should be filled with the initial data of the selected recipe", async () => {
+      renderWithProviders(
+        <Form buttonText="Update" actionOnSubmit={actionOnSubmit} />,
+        {
+          recipe: {
+            recipes: mockRecipesList,
+            totalRecipes: mockRecipesList.length,
+            selectedRecipe: mockRecipesList[0],
+          },
+        }
+      );
+      const labelField = screen.getByLabelText("Name :");
+
+      expect(labelField).toHaveValue(mockRecipesList[0].name);
     });
   });
 });
