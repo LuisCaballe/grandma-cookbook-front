@@ -3,6 +3,7 @@ import { RecipeStructure } from "../../store/recipe/types";
 import Button from "../Button/Button";
 import FormStyled from "../shared/FromStyled";
 import { useAppSelector } from "../../store";
+import { useLocation } from "react-router-dom";
 
 interface FormProps {
   buttonText: string;
@@ -14,6 +15,7 @@ const Form = ({
   actionOnSubmit,
 }: FormProps): React.ReactElement => {
   const { selectedRecipe } = useAppSelector((state) => state.recipe);
+  const location = useLocation();
 
   let initialReceivedRecipeData: RecipeStructure = {
     name: "",
@@ -23,7 +25,7 @@ const Form = ({
     ingredients: "",
     directions: "",
   };
-  if (selectedRecipe) {
+  if (selectedRecipe && !location.pathname.includes("add")) {
     initialReceivedRecipeData = {
       name: selectedRecipe.name,
       imageUrl: selectedRecipe.imageUrl,
