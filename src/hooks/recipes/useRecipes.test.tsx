@@ -63,7 +63,7 @@ describe("Given a getRecipes function", () => {
 
 describe("Given a removeRecipe function", () => {
   describe("When it is invoked with an existing id recipe", () => {
-    test("Then it should return as response as true", async () => {
+    test("Then it should show a modal as the recipe has been removed successfully", async () => {
       server.resetHandlers(...handlers);
 
       const {
@@ -171,6 +171,50 @@ describe("Given a getSelectedRecipe function", () => {
       await act(async () => {
         await getSelectedRecipe(mockRecipesList[0].id as string);
       });
+      const errorIcon = screen.getByAltText("error icon");
+
+      expect(errorIcon).toBeInTheDocument();
+    });
+  });
+});
+
+describe("Given an updateRecipe function", () => {
+  describe("When it is invoked with an existing recipe id and a updated recipe data", () => {
+    test("Then it should show a modal as the recipe has been updated successfully", async () => {
+      server.resetHandlers(...handlers);
+
+      const {
+        result: {
+          current: { updateRecipe },
+        },
+      } = renderHook(() => useRecipes(), { wrapper: wrapperWithProvider });
+
+      renderWithProviders(wrapWithRouter(<Layout />));
+
+      await act(async () => {
+        await updateRecipe(mockRecipesList[0].id as string, mockRecipesList[0]);
+      });
+      const successIcon = screen.getByAltText("success icon");
+
+      expect(successIcon).toBeInTheDocument();
+    });
+  });
+
+  describe("When it is invoked with an invalid recipe id or an invalid updated recipe data", () => {
+    test("Then it should show a modal as there has been and error updating th recipe", async () => {
+      server.resetHandlers(...errorHandlers);
+      const {
+        result: {
+          current: { updateRecipe },
+        },
+      } = renderHook(() => useRecipes(), { wrapper: wrapperWithProvider });
+
+      renderWithProviders(wrapWithRouter(<Layout />));
+
+      await act(async () => {
+        await updateRecipe(mockRecipesList[0].id as string, mockRecipesList[0]);
+      });
+
       const errorIcon = screen.getByAltText("error icon");
 
       expect(errorIcon).toBeInTheDocument();

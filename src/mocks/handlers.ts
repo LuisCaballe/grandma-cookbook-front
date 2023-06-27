@@ -31,6 +31,13 @@ export const handlers = [
   rest.get(`${apiUrl}/recipes/:recipeId`, (_req, res, ctx) => {
     return res(ctx.status(200), ctx.json({ recipeById: mockRecipesList[0] }));
   }),
+
+  rest.put(
+    `${apiUrl}/recipes/update/${mockRecipesList[0].id}`,
+    (_req, res, ctx) => {
+      return res(ctx.status(200));
+    }
+  ),
 ];
 
 export const errorHandlers = [
@@ -56,6 +63,13 @@ export const errorHandlers = [
   rest.get(`${apiUrl}/recipes/${mockRecipesList[0].id}`, (_req, res, ctx) => {
     return res(ctx.status(404));
   }),
+
+  rest.put(
+    `${apiUrl}/recipes/update/${mockRecipesList[0].id}`,
+    (_req, res, ctx) => {
+      return res(ctx.status(404));
+    }
+  ),
 ];
 
 export const mockTwelveRecipes = getRecipesListMock(12);
