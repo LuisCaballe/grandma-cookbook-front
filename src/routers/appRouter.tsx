@@ -8,6 +8,7 @@ import {
   LazyRecipesPage,
 } from "./LazyPages";
 import { Suspense } from "react";
+import UpdatePage from "../pages/UpdatePage/UpdatePage";
 
 const routes: RouteObject[] = [
   {
@@ -46,6 +47,10 @@ const routes: RouteObject[] = [
             <LazyDetailPage />
           </Suspense>
         ),
+      },
+      {
+        path: "/update/:recipeId",
+        element: <UpdatePage />,
       },
       {
         path: "*",
