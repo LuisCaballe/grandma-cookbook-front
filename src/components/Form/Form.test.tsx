@@ -1,6 +1,6 @@
 import { screen } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
-import { renderWithProviders } from "../../testUtils/testUtils";
+import { renderWithProviders, wrapWithRouter } from "../../testUtils/testUtils";
 import Form from "./Form";
 import { vi } from "vitest";
 import { mockRecipesList } from "../../mocks/recipeMocks";
@@ -21,7 +21,7 @@ describe("Given a Form component", () => {
     labels.forEach((label) => {
       test(`Then it should show a text field with the label text '${label}'`, () => {
         renderWithProviders(
-          <Form buttonText="" actionOnSubmit={actionOnSubmit} />
+          wrapWithRouter(<Form buttonText="" actionOnSubmit={actionOnSubmit} />)
         );
 
         const labelField = screen.getByLabelText(label);
@@ -36,7 +36,12 @@ describe("Given a Form component", () => {
       const expectedButtonText = "Add";
 
       renderWithProviders(
-        <Form buttonText={expectedButtonText} actionOnSubmit={actionOnSubmit} />
+        wrapWithRouter(
+          <Form
+            buttonText={expectedButtonText}
+            actionOnSubmit={actionOnSubmit}
+          />
+        )
       );
 
       const button = screen.getByRole("button", { name: expectedButtonText });
@@ -51,7 +56,7 @@ describe("Given a Form component", () => {
         const fieldText = "test";
 
         renderWithProviders(
-          <Form buttonText="" actionOnSubmit={actionOnSubmit} />
+          wrapWithRouter(<Form buttonText="" actionOnSubmit={actionOnSubmit} />)
         );
         const labelField = screen.getByLabelText(label);
         await userEvent.type(labelField, fieldText);
@@ -66,7 +71,7 @@ describe("Given a Form component", () => {
       const expectedTime = 45;
 
       renderWithProviders(
-        <Form buttonText="" actionOnSubmit={actionOnSubmit} />
+        wrapWithRouter(<Form buttonText="" actionOnSubmit={actionOnSubmit} />)
       );
 
       const cookingTimeField = screen.getByLabelText(labels[4]);
@@ -81,7 +86,7 @@ describe("Given a Form component", () => {
       const expectedOption = "Easy";
 
       renderWithProviders(
-        <Form buttonText="" actionOnSubmit={actionOnSubmit} />
+        wrapWithRouter(<Form buttonText="" actionOnSubmit={actionOnSubmit} />)
       );
 
       const difficultyField = screen.getByLabelText(labels[5]);
@@ -94,7 +99,9 @@ describe("Given a Form component", () => {
   describe("When it is rendered and the inputs fields are empty", () => {
     test("Then the button should be disabled", () => {
       renderWithProviders(
-        <Form buttonText="Add" actionOnSubmit={actionOnSubmit} />
+        wrapWithRouter(
+          <Form buttonText="Add" actionOnSubmit={actionOnSubmit} />
+        )
       );
 
       const button = screen.getByRole("button");
@@ -106,7 +113,9 @@ describe("Given a Form component", () => {
   describe("When it is rendered and the user fills in all the fields of the form", () => {
     test("Then the button should be enabled", async () => {
       renderWithProviders(
-        <Form buttonText="Add" actionOnSubmit={actionOnSubmit} />
+        wrapWithRouter(
+          <Form buttonText="Add" actionOnSubmit={actionOnSubmit} />
+        )
       );
 
       const button = screen.getByRole("button");
@@ -136,7 +145,9 @@ describe("Given a Form component", () => {
   describe("When it is rendered and the user fills in all the fields of the form and clicks on the button", () => {
     test("Then the handleSubmit function should be called", async () => {
       renderWithProviders(
-        <Form buttonText="Add" actionOnSubmit={actionOnSubmit} />
+        wrapWithRouter(
+          <Form buttonText="Add" actionOnSubmit={actionOnSubmit} />
+        )
       );
 
       const expectedTime = 45;
@@ -170,7 +181,9 @@ describe("Given a Form component", () => {
   describe("When it is rendered and there is an existing selected recipe ready to be updated", () => {
     test("Then all the fields of the form should be filled with the initial data of the selected recipe", async () => {
       renderWithProviders(
-        <Form buttonText="Update" actionOnSubmit={actionOnSubmit} />,
+        wrapWithRouter(
+          <Form buttonText="Update" actionOnSubmit={actionOnSubmit} />
+        ),
         {
           recipe: {
             recipes: mockRecipesList,
