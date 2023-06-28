@@ -5,6 +5,7 @@ import {
   removeRecipeActionCreator,
 } from "../../store/recipe/recipeSlice";
 import { paginationActionCreator } from "../../store/ui/uiSlice";
+import Filter from "../Filter/Filter";
 import RecipeCard from "../RecipeCard/RecipeCard";
 import RecipesListSyled from "./RecipesListStyled";
 
@@ -37,17 +38,20 @@ const RecipesList = (): React.ReactElement => {
   };
 
   return (
-    <RecipesListSyled>
-      {recipes.map((recipe, position) => (
-        <li key={recipe.id}>
-          <RecipeCard
-            recipe={recipe}
-            isLazy={position === 0 ? "eager" : "lazy"}
-            actionOnClick={removeOnClick}
-          />
-        </li>
-      ))}
-    </RecipesListSyled>
+    <>
+      <Filter />
+      <RecipesListSyled>
+        {recipes.map((recipe, position) => (
+          <li key={recipe.id}>
+            <RecipeCard
+              recipe={recipe}
+              isLazy={position === 0 ? "eager" : "lazy"}
+              actionOnClick={removeOnClick}
+            />
+          </li>
+        ))}
+      </RecipesListSyled>
+    </>
   );
 };
 
