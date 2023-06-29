@@ -63,6 +63,11 @@ a {
 img {
   max-width: 100%;
 }
+
+select {
+  border-right: 10px solid transparent;
+  outline: none;
+}
 `;
 
 export default GlobalStyle;
