@@ -63,6 +63,11 @@ const uiSlice = createSlice({
         skip: action.payload.skip,
       },
     }),
+
+    resetPagination: (currentState: UiStructure): UiStructure => ({
+      ...currentState,
+      ...initialUiState,
+    }),
   },
 });
 
@@ -72,6 +77,7 @@ export const {
   showFeedback: showFeedbackActionCreator,
   hideFeedback: hideFeedbackActionCreator,
   pagination: paginationActionCreator,
+  resetPagination: resetPaginationActionCreator,
 } = uiSlice.actions;
 
 export const uiReducer = uiSlice.reducer;
