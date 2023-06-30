@@ -31,10 +31,7 @@ const Button = ({
       disabled={isDisabled}
       type={type}
     >
-      {text ||
-        (icon && (
-          <img src={icon} alt={altText} width={width} height={height} />
-        ))}
+      {text ?? <img src={icon} alt={altText} width={width} height={height} />}
     </button>
   );
 };

@@ -5,6 +5,7 @@ import { logoutUserActionCreator } from "../../store/user/userSlice";
 import useLocalStorage from "../../hooks/localStorage/useLocalStorage";
 import Button from "../Button/Button";
 import { resetRecipesActionCreator } from "../../store/recipe/recipeSlice";
+import { resetPaginationActionCreator } from "../../store/ui/uiSlice";
 
 const NavBar = (): React.ReactElement => {
   const dispatch = useAppDispatch();
@@ -15,6 +16,7 @@ const NavBar = (): React.ReactElement => {
     dispatch(logoutUserActionCreator());
     removeToken("token");
     dispatch(resetRecipesActionCreator());
+    dispatch(resetPaginationActionCreator());
     navigate("/login");
   };
 

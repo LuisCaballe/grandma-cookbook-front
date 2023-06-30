@@ -23,14 +23,19 @@ const useRecipes = () => {
   );
 
   const getRecipes = useCallback(
-    async (skip: number): Promise<RecipeStateResponse | undefined> => {
+    async (
+      skip: number,
+      filter?: string
+    ): Promise<RecipeStateResponse | undefined> => {
       dispatch(showLoadingActionCreator());
 
       try {
         const {
           data: { recipes, totalRecipes },
         } = await axios.get<RecipeStateResponse>(
-          `${apiUrl}/recipes?skip=${skip}&limit=5`,
+          `${apiUrl}/recipes?skip=${skip}&limit=5${
+            filter ? `&filter=${filter}` : ""
+          }`,
           request
         );
 
