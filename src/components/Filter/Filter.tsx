@@ -32,6 +32,7 @@ const Filter = (): React.ReactElement => {
             onChange={handleOnFilter}
             id="difficulty"
             className="filter-form__input"
+            aria-label="filter by difficulty"
           >
             <option value="">Filter by difficulty</option>
             <option value="Easy">Easy</option>

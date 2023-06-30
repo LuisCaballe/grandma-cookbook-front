@@ -18,7 +18,7 @@ export const mockRecipesList: RecipeStructure[] = [
     imageUrl:
       "https://cdn.elcocinerocasero.com/imagen/receta/1000/2021-06-17-12-54-08/como-cocer-huevos.jpeg",
     cookingTime: 10,
-    difficulty: "Easy",
+    difficulty: "Moderate",
     directions: "Just boil a egg",
     ingredients: "Water, egg",
     user: "646fa0775a615cd9e3388ca9",

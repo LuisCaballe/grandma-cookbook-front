@@ -89,3 +89,20 @@ export const paginationHandlers = [
     );
   }),
 ];
+
+export const filterHandlers = [
+  rest.get(`${apiUrl}/recipes`, (req, res, ctx) => {
+    const searchParams = req.url.searchParams;
+    searchParams.set("skip", "0");
+    searchParams.set("limit", "5");
+    searchParams.set("filter", "Easy");
+
+    return res(
+      ctx.status(200),
+      ctx.json({
+        recipes: [mockRecipesList[0]],
+        totalRecipes: 1,
+      })
+    );
+  }),
+];
