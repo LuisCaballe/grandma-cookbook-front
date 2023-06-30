@@ -4,6 +4,7 @@ import {
   addFilterActionCreator,
   loadRecipesActionCreator,
 } from "../../store/recipe/recipeSlice";
+import { resetPaginationActionCreator } from "../../store/ui/uiSlice";
 import FilterStyled from "./FilterStyled";
 
 const Filter = (): React.ReactElement => {
@@ -21,6 +22,8 @@ const Filter = (): React.ReactElement => {
     if (recipesState) {
       const { recipes, totalRecipes } = recipesState;
       dispatch(loadRecipesActionCreator({ recipes, totalRecipes }));
+      dispatch(resetPaginationActionCreator());
+      window.scrollTo(0, 0);
     }
   };
 
