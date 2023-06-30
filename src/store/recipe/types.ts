@@ -13,6 +13,7 @@ export interface RecipesState {
   recipes: RecipeStructure[];
   totalRecipes: number;
   selectedRecipe?: RecipeStructure;
+  filter?: string;
 }
 
 export interface RecipeStateResponse extends RecipesState {
