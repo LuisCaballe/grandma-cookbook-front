@@ -9,7 +9,9 @@ import RecipeCard from "../RecipeCard/RecipeCard";
 import RecipesListSyled from "./RecipesListStyled";
 
 const RecipesList = (): React.ReactElement => {
-  const recipes = useAppSelector((state) => state.recipe.recipes);
+  const { recipes, filter: currentFilter } = useAppSelector(
+    (state) => state.recipe
+  );
   let { page, skip } = useAppSelector((state) => state.ui.paginationData);
   const { removeRecipe, getRecipes } = useRecipes();
   const dispatch = useAppDispatch();
@@ -18,7 +20,7 @@ const RecipesList = (): React.ReactElement => {
     await removeRecipe(recipeId);
     dispatch(removeRecipeActionCreator(recipeId));
 
-    const recipesData = await getRecipes(skip);
+    const recipesData = await getRecipes(skip, currentFilter);
 
     if (recipesData) {
       dispatch(loadRecipesActionCreator(recipesData));
@@ -26,7 +28,7 @@ const RecipesList = (): React.ReactElement => {
       if (recipes.length === 0 && totalRecipes > 1) {
         skip -= 5;
         page -= 1;
-        const recipesData = await getRecipes(skip);
+        const recipesData = await getRecipes(skip, currentFilter);
         if (recipesData) {
           dispatch(loadRecipesActionCreator(recipesData));
           dispatch(paginationActionCreator({ page, skip }));

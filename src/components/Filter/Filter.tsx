@@ -1,5 +1,5 @@
 import useRecipes from "../../hooks/recipes/useRecipes";
-import { useAppDispatch } from "../../store";
+import { useAppDispatch, useAppSelector } from "../../store";
 import {
   addFilterActionCreator,
   loadRecipesActionCreator,
@@ -8,8 +8,9 @@ import { resetPaginationActionCreator } from "../../store/ui/uiSlice";
 import FilterStyled from "./FilterStyled";
 
 const Filter = (): React.ReactElement => {
-  const { getRecipes } = useRecipes();
   const dispatch = useAppDispatch();
+  const { getRecipes } = useRecipes();
+  const { filter: currentFilter } = useAppSelector((state) => state.recipe);
 
   const handleOnFilter = async (
     event: React.ChangeEvent<HTMLSelectElement>
@@ -36,6 +37,7 @@ const Filter = (): React.ReactElement => {
             id="difficulty"
             className="filter-form__input"
             aria-label="filter by difficulty"
+            defaultValue={currentFilter}
           >
             <option value="">Filter by difficulty</option>
             <option value="Easy">Easy</option>
