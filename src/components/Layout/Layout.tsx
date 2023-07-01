@@ -17,8 +17,8 @@ const Layout = (): React.ReactElement => {
         <Header />
         <Outlet />
       </ContainerStyled>
-      {showFeedback && <Feedback />}
       {isLoading && <Loader />}
+      {showFeedback && <Feedback />}
     </>
   );
 };
