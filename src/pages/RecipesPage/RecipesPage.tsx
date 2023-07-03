@@ -1,4 +1,4 @@
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { useAppDispatch, useAppSelector } from "../../store";
 import { loadRecipesActionCreator } from "../../store/recipe/recipeSlice";
 import RecipesPageStyled from "./RecipesPageStyled";
@@ -11,11 +11,10 @@ import Filter from "../../components/Filter/Filter";
 const RecipesPage = (): React.ReactElement => {
   const dispatch = useAppDispatch();
   const userName = useAppSelector((state) => state.user.name);
-  const { recipes: currentRecipes, filter } = useAppSelector(
-    (state) => state.recipe
-  );
+  const { recipes: currentRecipes } = useAppSelector((state) => state.recipe);
   let { page, skip } = useAppSelector((state) => state.ui.paginationData);
   const { getRecipes } = useRecipes();
+  const [filterValue, setFilterValue] = useState("");
 
   const nextPage = () => {
     page = page + 1;
@@ -33,7 +32,7 @@ const RecipesPage = (): React.ReactElement => {
 
   useEffect(() => {
     (async () => {
-      const recipesState = await getRecipes(skip, filter);
+      const recipesState = await getRecipes(skip, filterValue);
 
       if (recipesState) {
         const { recipes, totalRecipes } = recipesState;
@@ -54,12 +53,12 @@ const RecipesPage = (): React.ReactElement => {
         }
       }
     })();
-  }, [dispatch, filter, getRecipes, skip]);
+  }, [dispatch, filterValue, getRecipes, skip]);
 
   return (
     <RecipesPageStyled className="recipes">
       <h1 className="recipes__title">{`${userName}'s recipes`}</h1>
-      <Filter />
+      <Filter setFilterValue={setFilterValue} filterValue={filterValue} />
       {currentRecipes.length !== 0 ? (
         <>
           <p>Here is your list of recipes, enjoy your meal!</p>
