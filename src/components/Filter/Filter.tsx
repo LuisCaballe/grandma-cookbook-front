@@ -1,31 +1,24 @@
-import useRecipes from "../../hooks/recipes/useRecipes";
-import { useAppDispatch, useAppSelector } from "../../store";
-import {
-  addFilterActionCreator,
-  loadRecipesActionCreator,
-} from "../../store/recipe/recipeSlice";
+import { useAppDispatch } from "../../store";
 import { resetPaginationActionCreator } from "../../store/ui/uiSlice";
 import FilterStyled from "./FilterStyled";
 
-const Filter = (): React.ReactElement => {
+interface FilterProps {
+  setFilterValue: (filterValue: string) => void;
+  filterValue: string;
+}
+
+const Filter = ({
+  setFilterValue,
+  filterValue,
+}: FilterProps): React.ReactElement => {
   const dispatch = useAppDispatch();
-  const { getRecipes } = useRecipes();
-  const { filter: currentFilter } = useAppSelector((state) => state.recipe);
 
   const handleOnFilter = async (
     event: React.ChangeEvent<HTMLSelectElement>
   ) => {
     const filter = event.target.value;
-    dispatch(addFilterActionCreator(filter));
-
-    const recipesState = await getRecipes(0, filter);
-
-    if (recipesState) {
-      const { recipes, totalRecipes } = recipesState;
-      dispatch(loadRecipesActionCreator({ recipes, totalRecipes }));
-      dispatch(resetPaginationActionCreator());
-      window.scrollTo(0, 0);
-    }
+    setFilterValue(filter);
+    dispatch(resetPaginationActionCreator());
   };
 
   return (
@@ -37,7 +30,7 @@ const Filter = (): React.ReactElement => {
             id="difficulty"
             className="filter-form__input"
             aria-label="filter by difficulty"
-            defaultValue={currentFilter}
+            defaultValue={filterValue}
           >
             <option value="">Filter by difficulty</option>
             <option value="Easy">Easy</option>
