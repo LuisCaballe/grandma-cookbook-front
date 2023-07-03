@@ -15,10 +15,12 @@ const NavBarStyled = styled.nav`
       align-items: center;
       justify-content: center;
       color: ${(props) => props.theme.colors.primary};
+      border-bottom: 4px solid transparent;
 
       &.active {
-        color: ${(props) => props.theme.colors.dark};
+        color: ${(props) => props.theme.colors.secondary};
         font-weight: 700;
+        border-bottom: 4px solid ${(props) => props.theme.colors.secondary};
       }
     }
   }

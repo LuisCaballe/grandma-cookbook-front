@@ -12,9 +12,9 @@ describe("Given a NavBar component", () => {
       const expectedLinkText = "Home";
 
       renderWithProviders(wrapWithRouter(<NavBar />));
-      const homeLink = screen.getByRole("link", { name: expectedLinkText });
+      const homeButton = screen.getByRole("button", { name: expectedLinkText });
 
-      expect(homeLink).toBeInTheDocument();
+      expect(homeButton).toBeInTheDocument();
     });
   });
 
