@@ -3,8 +3,13 @@ import NavBar from "./NavBar";
 import userEvent from "@testing-library/user-event";
 import { renderWithProviders, wrapWithRouter } from "../../testUtils/testUtils";
 import { getUserMock } from "../../factories/user/userFactory";
-import { RouterProvider, createMemoryRouter } from "react-router-dom";
+import {
+  RouteObject,
+  RouterProvider,
+  createMemoryRouter,
+} from "react-router-dom";
 import LoginPage from "../../pages/LoginPage/LoginPage";
+import RecipesPage from "../../pages/RecipesPage/RecipesPage";
 
 describe("Given a NavBar component", () => {
   describe("When it is rendered", () => {
@@ -40,6 +45,32 @@ describe("Given a NavBar component", () => {
       await userEvent.click(logoutButton);
 
       expect(logoutButton).not.toBeInTheDocument();
+    });
+
+    describe("", () => {
+      test("", async () => {
+        const routes: RouteObject[] = [
+          {
+            path: "/",
+            element: <NavBar />,
+          },
+          {
+            path: "/home",
+            element: <RecipesPage />,
+          },
+        ];
+
+        const router = createMemoryRouter(routes);
+
+        renderWithProviders(<RouterProvider router={router} />, {
+          user: { id: "1", isLogged: true, name: "Admin", token: "1234" },
+        });
+
+        const homeButton = screen.getByRole("button", { name: "Home" });
+        await userEvent.click(homeButton);
+
+        expect(router.state.location.pathname).toBe("/home");
+      });
     });
   });
 });
