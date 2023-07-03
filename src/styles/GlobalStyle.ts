@@ -65,6 +65,7 @@ img {
 }
 
 select {
+  background-color: ${(props) => props.theme.colors.light};
   border-right: 10px solid transparent;
   outline: none;
 }

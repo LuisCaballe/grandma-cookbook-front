@@ -14,8 +14,8 @@ const NavBar = (): React.ReactElement => {
   const navigate = useNavigate();
 
   const logoutOnClick = () => {
-    dispatch(logoutUserActionCreator());
     removeToken("token");
+    dispatch(logoutUserActionCreator());
     dispatch(resetRecipesActionCreator());
     dispatch(resetPaginationActionCreator());
     navigate("/login");
