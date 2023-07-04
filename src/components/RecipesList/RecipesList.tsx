@@ -26,7 +26,7 @@ const RecipesList = (): React.ReactElement => {
       dispatch(loadRecipesActionCreator(recipesData));
       const { recipes, totalRecipes } = recipesData;
       if (recipes.length === 0 && totalRecipes > 1) {
-        skip -= 5;
+        skip -= 6;
         page -= 1;
         const recipesData = await getRecipes(skip, currentFilter);
         if (recipesData) {

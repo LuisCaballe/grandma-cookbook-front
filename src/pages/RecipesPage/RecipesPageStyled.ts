@@ -14,8 +14,22 @@ const RecipesPageStyled = styled.section`
       padding: 10px 30px;
     }
 
+    &__header {
+      display: flex;
+      align-items: baseline;
+      justify-content: space-between;
+      gap: 100px;
+
+      @media screen and (max-width: 550px) {
+        flex-direction: column-reverse;
+        align-items: initial;
+        gap: 30px;
+      }
+    }
+
     &__image {
       margin: 0 auto;
+      mix-blend-mode: multiply;
     }
   }
 `;

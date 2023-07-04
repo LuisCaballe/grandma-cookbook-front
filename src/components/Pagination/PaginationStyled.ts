@@ -5,6 +5,7 @@ const PaginationStyled = styled.div`
   justify-content: space-between;
   align-items: center;
   background-color: ${(props) => props.theme.colors.lightBackground};
+  border-radius: 10px;
 
   .pagination {
     &__button {

@@ -33,7 +33,7 @@ const useRecipes = () => {
         const {
           data: { recipes, totalRecipes },
         } = await axios.get<RecipeStateResponse>(
-          `${apiUrl}/recipes?skip=${skip}&limit=5${
+          `${apiUrl}/recipes?skip=${skip}&limit=6${
             filter ? `&filter=${filter}` : ""
           }`,
           request

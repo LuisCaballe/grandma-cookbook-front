@@ -4,6 +4,7 @@ const RecipeCardStyled = styled.article`
   background-color: ${(props) => props.theme.colors.lightBackground};
   width: 260px;
   position: relative;
+  border-radius: 10px 10px 0 0;
 
   .recipe-card {
     &__image {

@@ -64,25 +64,24 @@ const DetailPage = (): React.ReactElement => {
             width="260"
             height="280"
           />
-          <div className="detail__text-container">
-            <h2 className="detail__title">{recipe?.name}</h2>
-            <div>
-              <span className="detail__text">Difficulty :</span>{" "}
-              {recipe?.difficulty}
-            </div>
-            <div>
-              <span className="detail__text">Cooking time :</span>{" "}
-              {recipe?.cookingTime} minutes
-            </div>
-            <div>
-              <span className="detail__text">Ingredients :</span>{" "}
-              {recipe?.ingredients}
-            </div>
-            <div>
-              <span className="detail__text">Directions :</span>{" "}
-              {recipe?.directions}
-            </div>
-          </div>
+          <h2 className="detail__title">{recipe?.name}</h2>
+          <p>
+            <span className="detail__text">Difficulty :</span>{" "}
+            {recipe?.difficulty}
+          </p>
+          <p>
+            <span className="detail__text">Cooking time :</span>{" "}
+            {recipe?.cookingTime} minutes
+          </p>
+          <p>
+            <span className="detail__text">Ingredients :</span>{" "}
+            {recipe?.ingredients}
+          </p>
+
+          <p>
+            <span className="detail__text">Directions :</span>{" "}
+            {recipe?.directions}
+          </p>
         </section>
       </DetailPageStyled>
     </>

@@ -7,6 +7,11 @@ const DetailPageStyled = styled.main`
   margin: 0 auto;
 
   .detail {
+    width: 260px;
+    position: relative;
+    background-color: ${(props) => props.theme.colors.lightBackground};
+    margin: 0 auto;
+
     &__heading {
       font-size: 2rem;
       color: ${(props) => props.theme.colors.primary};
@@ -14,13 +19,6 @@ const DetailPageStyled = styled.main`
       background-color: ${(props) => props.theme.colors.lightBackground};
       padding: 10px 30px;
     }
-  }
-
-  .detail {
-    width: 260px;
-    position: relative;
-    background-color: ${(props) => props.theme.colors.lightBackground};
-    margin: 0 auto;
 
     &__image {
       border-radius: 10px 10px 0 0;
@@ -47,6 +45,23 @@ const DetailPageStyled = styled.main`
       position: absolute;
       right: 10px;
       top: 10px;
+    }
+
+    h2,
+    p {
+      margin: 20px;
+    }
+  }
+
+  @media screen and (min-width: 700px) {
+    .detail {
+      width: 100%;
+
+      &__image {
+        float: right;
+        margin: 0 0 20px 20px;
+        border-radius: 0 10px 0 0;
+      }
     }
   }
 `;
