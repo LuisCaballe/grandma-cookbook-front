@@ -16,6 +16,7 @@ const RecipesPageStyled = styled.section`
 
     &__image {
       margin: 0 auto;
+      mix-blend-mode: multiply;
     }
   }
 `;

@@ -37,13 +37,8 @@ const LoginPage = (): React.ReactElement => {
         Organize and relive the flavors of your childhood. Keep your culinary
         heritage alive for generations to come.
       </p>
-      <img
-        src="images/draw.webp"
-        alt="Illustration of cooking ingredients"
-        width="260"
-        height="135"
-      />
       <LoginForm actionOnSubmit={loginOnSubmit} />
+      <img src="images/draw.webp" alt="Illustration of cooking ingredients" />
     </LoginPageStyled>
   );
 };

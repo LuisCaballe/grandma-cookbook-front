@@ -14,6 +14,7 @@ html {
 
 body {
   margin: 0;
+  background-color: ${(props) => props.theme.colors.lightBackground}40;
 }
 
 h1,

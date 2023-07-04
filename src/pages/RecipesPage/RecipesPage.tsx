@@ -77,8 +77,6 @@ const RecipesPage = (): React.ReactElement => {
           <img
             src="images/draw.webp"
             alt="Illustration of cooking ingredients"
-            width="260"
-            height="135"
             className="recipes__image"
           />
         </>
