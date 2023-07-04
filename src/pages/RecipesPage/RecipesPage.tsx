@@ -18,14 +18,14 @@ const RecipesPage = (): React.ReactElement => {
 
   const nextPage = () => {
     page = page + 1;
-    skip = skip + 5;
+    skip = skip + 6;
     dispatch(paginationActionCreator({ page, skip }));
     window.scrollTo(0, 0);
   };
 
   const previousPage = () => {
     page = page - 1;
-    skip = skip - 5;
+    skip = skip - 6;
     dispatch(paginationActionCreator({ page, skip }));
     window.scrollTo(0, 0);
   };

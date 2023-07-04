@@ -78,7 +78,7 @@ export const paginationHandlers = [
   rest.get(`${apiUrl}/recipes`, (req, res, ctx) => {
     const searchParams = req.url.searchParams;
     searchParams.set("skip", "0");
-    searchParams.set("limit", "5");
+    searchParams.set("limit", "6");
 
     return res(
       ctx.status(200),
@@ -94,7 +94,7 @@ export const filterHandlers = [
   rest.get(`${apiUrl}/recipes`, (req, res, ctx) => {
     const searchParams = req.url.searchParams;
     searchParams.set("skip", "0");
-    searchParams.set("limit", "5");
+    searchParams.set("limit", "6");
     searchParams.set("filter", "Easy");
 
     return res(
