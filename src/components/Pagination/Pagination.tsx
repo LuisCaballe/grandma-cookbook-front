@@ -14,7 +14,7 @@ const Pagination = ({
   const totalRecipes = useAppSelector((state) => state.recipe.totalRecipes);
   const page = useAppSelector((state) => state.ui.paginationData.page);
 
-  const totalPages = Math.ceil(totalRecipes / 5);
+  const totalPages = Math.ceil(totalRecipes / 6);
 
   const isPreviousDisabled = page === 1;
 

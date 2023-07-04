@@ -58,10 +58,12 @@ const RecipesPage = (): React.ReactElement => {
   return (
     <RecipesPageStyled className="recipes">
       <h1 className="recipes__title">{`${userName}'s recipes`}</h1>
-      <Filter setFilterValue={setFilterValue} filterValue={filterValue} />
       {currentRecipes.length !== 0 ? (
         <>
-          <p>Here is your list of recipes, enjoy your meal!</p>
+          <header className="recipes__header">
+            <p>Here is your list of recipes, enjoy your meal!</p>
+            <Filter setFilterValue={setFilterValue} filterValue={filterValue} />
+          </header>
           <RecipesList />
           <Pagination
             nextPageOnClick={nextPage}
@@ -70,10 +72,13 @@ const RecipesPage = (): React.ReactElement => {
         </>
       ) : (
         <>
-          <p>
-            Unfortunately, there are no recipes in your collection, try to add
-            some and enjoy your meal!
-          </p>
+          <header className="recipes__header">
+            <p>
+              Unfortunately, there are no recipes in your collection, try to add
+              some and enjoy your meal!
+            </p>
+            <Filter setFilterValue={setFilterValue} filterValue={filterValue} />
+          </header>
           <img
             src="images/draw.webp"
             alt="Illustration of cooking ingredients"
