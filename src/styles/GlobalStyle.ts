@@ -14,7 +14,7 @@ html {
 
 body {
   margin: 0;
-  background-color: ${(props) => props.theme.colors.lightBackground}40;
+  background-color: ${(props) => props.theme.colors.lightBackground}50;
 }
 
 h1,
@@ -33,6 +33,7 @@ h1 {
 
 p {
   margin: 0;
+  line-height: 1.5;
 }
 
 ul {
