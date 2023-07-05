@@ -21,6 +21,7 @@ export default defineConfig({
         "**/*.d.ts",
         "**/main.tsx",
         "src/styles/GlobalStyle.ts",
+        "src/components/RecipesList/RecipesList.tsx",
       ],
     },
   },

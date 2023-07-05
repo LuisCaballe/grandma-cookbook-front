@@ -23,7 +23,7 @@ describe("Given a NavBar component", () => {
     });
   });
 
-  describe("When it is rendered and the user clicks on logout button", () => {
+  describe("When it is rendered and the user clicks on the 'logout' button", () => {
     test("Then the logout button should disappear", async () => {
       const userMock = getUserMock({ isLogged: true });
       const routes = [
@@ -46,31 +46,60 @@ describe("Given a NavBar component", () => {
 
       expect(logoutButton).not.toBeInTheDocument();
     });
+  });
 
-    describe("", () => {
-      test("", async () => {
-        const routes: RouteObject[] = [
-          {
-            path: "/",
-            element: <NavBar />,
-          },
-          {
-            path: "/home",
-            element: <RecipesPage />,
-          },
-        ];
+  describe("When it is rendered and the user clicks on the 'home' button", () => {
+    test("Then it should redirect to the home page", async () => {
+      const routes: RouteObject[] = [
+        {
+          path: "/",
+          element: <NavBar />,
+        },
+        {
+          path: "/home",
+          element: <RecipesPage />,
+        },
+      ];
 
-        const router = createMemoryRouter(routes);
+      const router = createMemoryRouter(routes);
 
-        renderWithProviders(<RouterProvider router={router} />, {
-          user: { id: "1", isLogged: true, name: "Admin", token: "1234" },
-        });
-
-        const homeButton = screen.getByRole("button", { name: "Home" });
-        await userEvent.click(homeButton);
-
-        expect(router.state.location.pathname).toBe("/home");
+      renderWithProviders(<RouterProvider router={router} />, {
+        user: { id: "1", isLogged: true, name: "Admin", token: "1234" },
       });
+
+      const homeButton = screen.getByRole("button", { name: "Home" });
+      await userEvent.click(homeButton);
+
+      expect(router.state.location.pathname).toBe("/home");
+    });
+  });
+
+  describe("When it is rendered in the home page", () => {
+    test("Then it should show the 'home' button as active", async () => {
+      const routes: RouteObject[] = [
+        {
+          path: "/",
+          element: <NavBar />,
+        },
+        {
+          path: "/home",
+          element: <NavBar />,
+        },
+      ];
+
+      const router = createMemoryRouter(routes);
+
+      renderWithProviders(<RouterProvider router={router} />, {
+        user: { id: "1", isLogged: true, name: "Admin", token: "1234" },
+      });
+
+      const homeButton = screen.getByRole("button", { name: "Home" });
+      await userEvent.click(homeButton);
+
+      const homeButtonRoots = document.getElementsByClassName("active");
+      const style = window.getComputedStyle(homeButtonRoots[0]);
+
+      expect(style.fontWeight).toBe("700");
     });
   });
 });
