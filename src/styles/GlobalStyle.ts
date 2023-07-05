@@ -63,6 +63,7 @@ a {
 }
 
 img {
+  height: 100%;
   max-width: 100%;
 }
 

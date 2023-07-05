@@ -18,7 +18,7 @@ const NavBarStyled = styled.nav`
       border-bottom: 4px solid transparent;
 
       &.active {
-        color: ${(props) => props.theme.colors.secondary};
+        color: ${(props) => props.theme.colors.dark};
         font-weight: 700;
         border-bottom: 4px solid ${(props) => props.theme.colors.secondary};
       }

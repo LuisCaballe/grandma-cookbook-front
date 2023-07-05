@@ -38,7 +38,12 @@ const LoginPage = (): React.ReactElement => {
         heritage alive for generations to come.
       </p>
       <LoginForm actionOnSubmit={loginOnSubmit} />
-      <img src="images/draw.webp" alt="Illustration of cooking ingredients" />
+      <img
+        src="images/draw.webp"
+        alt="Illustration of cooking ingredients"
+        width="390"
+        height="203"
+      />
     </LoginPageStyled>
   );
 };
