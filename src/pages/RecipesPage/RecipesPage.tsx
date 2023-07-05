@@ -42,7 +42,7 @@ const RecipesPage = (): React.ReactElement => {
         if (recipes.length > 0) {
           const firstImageUrl = recipes[0].imageUrl;
 
-          const preconnectElement = await document.createElement("link");
+          const preconnectElement = document.createElement("link");
           preconnectElement.rel = "preload";
           preconnectElement.as = "image";
           preconnectElement.href = firstImageUrl;
