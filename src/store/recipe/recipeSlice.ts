@@ -53,6 +53,14 @@ const recipeSlice = createSlice({
       ...currentRecipesState,
       ...initialRecipesState,
     }),
+
+    addFilter: (
+      currentRecipeState: RecipesState,
+      action: PayloadAction<string>
+    ): RecipesState => ({
+      ...currentRecipeState,
+      filter: action.payload,
+    }),
   },
 });
 
@@ -62,6 +70,7 @@ export const {
   addRecipe: addRecipeActionCreator,
   loadSelectedRecipe: loadSelectedRecipeActionCreator,
   resetRecipes: resetRecipesActionCreator,
+  addFilter: addFilterActionCreator,
 } = recipeSlice.actions;
 
 export const recipeReducer = recipeSlice.reducer;

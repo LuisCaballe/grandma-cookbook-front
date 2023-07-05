@@ -1,4 +1,5 @@
 import { useAppDispatch } from "../../store";
+import { addFilterActionCreator } from "../../store/recipe/recipeSlice";
 import { resetPaginationActionCreator } from "../../store/ui/uiSlice";
 import FilterStyled from "./FilterStyled";
 
@@ -18,6 +19,7 @@ const Filter = ({
   ) => {
     const filter = event.target.value;
     setFilterValue(filter);
+    dispatch(addFilterActionCreator(filter));
     dispatch(resetPaginationActionCreator());
   };
 
