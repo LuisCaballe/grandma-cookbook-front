@@ -25,15 +25,16 @@ const DetailPage = (): React.ReactElement => {
             loadSelectedRecipeActionCreator(selectedRecipe as RecipeStructure)
           );
 
-          const firstImageUrl = selectedRecipe?.imageUrl as string;
-
-          const preconnectElement = await document.createElement("link");
-          preconnectElement.rel = "preload";
-          preconnectElement.as = "image";
-          preconnectElement.href = firstImageUrl;
+          const imageUrl = selectedRecipe?.imageUrl as string;
 
           const parent = document.head;
           const firstChild = document.head.firstChild;
+
+          const preconnectElement = document.createElement("link");
+          preconnectElement.rel = "preload";
+          preconnectElement.as = "image";
+          preconnectElement.href = imageUrl;
+
           parent.insertBefore(preconnectElement, firstChild);
         }
       }
